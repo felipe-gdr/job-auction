@@ -1,6 +1,6 @@
 const { PubSub } = require('apollo-server');
 
-const { getRecentJobs, getJobsByUser, getJobsByTag, addJob } = require('./data/jobs');
+const { getRecentJobs, getJobsByUser, getJobsByTag, addJob, getJob } = require('./data/jobs');
 const { getTags } = require('./data/tags');
 const { getUser } = require('./data/users');
 
@@ -15,7 +15,8 @@ const resolvers = {
         jobsByUser: (root, args, context) => getJobsByUser(args),
         jobsByTag: (root, args, context) => getJobsByTag(args),
         user: (root, args, context) => getUser(args),
-        tags: (root, args, context) => getTags(args)
+        tags: (root, args, context) => getTags(args),
+        job: (root, args, context) => getJob(args)
     },
     Job: {
         user: job => getUser({ id: job.userId }),

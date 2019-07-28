@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Pages from './pages';
 import * as serviceWorker from './serviceWorker';
 
 import { HttpLink } from 'apollo-link-http';
@@ -46,7 +46,7 @@ const client = new ApolloClient({
 function Main() {
     return (
         <ApolloProvider client={client}>
-            <App />
+            <Pages />
         </ApolloProvider>
     );
 }

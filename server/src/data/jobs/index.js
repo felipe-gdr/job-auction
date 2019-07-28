@@ -63,9 +63,20 @@ const addJob = (jobData) => {
         });
 }
 
+const getJob = ({
+    id,
+} = {}) => {
+    if (!id) {
+        return {};
+    }
+
+    return database.collection(COLLECTION).doc(id).get().then(toGraphQLObj);
+}
+
 module.exports = {
     getRecentJobs,
     getJobsByUser,
     getJobsByTag,
-    addJob
+    addJob,
+    getJob
 }

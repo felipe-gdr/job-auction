@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) => {
     useEffect(subscribeToNewJobs, [tag])
@@ -9,9 +10,9 @@ export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) =
     return <div>
         {
             data.jobs.map(({ id, title }) => (
-                <div key={id}>
+                <Link to={`job/${id}`} key={id}>
                     <p>{id}: {title}</p>
-                </div>
+                </Link>
             ))
         }
         <button onClick={onLoadMore}>More.</button>

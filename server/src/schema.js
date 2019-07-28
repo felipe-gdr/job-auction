@@ -24,6 +24,8 @@ const typeDefs = gql`
       user(username: String id: ID): User 
 
       tags(query: String): [Tag]!
+
+      job(id: ID!): Job
   }
 
   type Subscription {
@@ -42,7 +44,7 @@ const typeDefs = gql`
 
   type Job {
       id: ID!
-      createDate: Date 
+      createdDate: Date 
       dueDate: Date
       user: User
       title: String!
