@@ -3,16 +3,27 @@ import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import { withRouter } from 'react-router';
 
-import { JOBS_SUBSCRIPTION } from '../job-subscription';
+import { JOBS_SUBSCRIPTION } from '../job-notification';
 
 import View from './view';
+
+const JOBS_FRAGMENT = `
+  id
+  title
+  tags 
+  dueDate
+  image
+  user {
+    username
+    displayName
+    avatar
+  }
+`
 
 const JOBS_RECENT_QUERY = gql`
   query ($lastId: ID) {
     jobs:jobsRecent(startAfter: $lastId) {
-      id
-      title
-      tags 
+      ${JOBS_FRAGMENT}
     }
   }
 `;
@@ -20,9 +31,7 @@ const JOBS_RECENT_QUERY = gql`
 const JOBS_BY_TAG_QUERY = gql`
   query ($lastId: ID, $tag: String!) {
     jobs:jobsByTag(startAfter: $lastId, tag: $tag) {
-      id
-      title
-      tags 
+      ${JOBS_FRAGMENT}
     }
   }
 `;
@@ -32,42 +41,43 @@ const getQuery = tag => tag ? JOBS_BY_TAG_QUERY : JOBS_RECENT_QUERY;
 const getVariables = tag => tag ? { lastId: null, tag: tag.title } : { lastId: null };
 
 const JobList = ({ tag, history }) => (
-    <Query
-        query={getQuery(tag)}
-        variables={getVariables(tag)}
-    >
-        {({ fetchMore, subscribeToMore, ...result }) => (
-            <View
-                {...result}
-                tag={tag}
-                onClickJob={job => history.push(`job/${job.id}`)}
-                onLoadMore={() =>
-                    fetchMore({
-                        variables: {
-                            lastId: result.data.jobs && result.data.jobs.length > 0 && result.data.jobs[result.data.jobs.length - 1].id
-                        },
-                        updateQuery: (prev, { fetchMoreResult }) => {
-                            if (!fetchMoreResult) return prev;
-                            return { ...prev, jobs: [...prev.jobs, ...fetchMoreResult.jobs] };
-                        }
-                    })
-                }
-                subscribeToNewJobs={() =>
-                    subscribeToMore({
-                        document: JOBS_SUBSCRIPTION,
-                        updateQuery: (prev, { subscriptionData }) => {
-                            if (!subscriptionData.data) return prev;
-                            if (tag && !subscriptionData.data.jobAdded.tags.find(t => tag.title === t)) return prev;
+  <Query
+    query={getQuery(tag)}
+    variables={getVariables(tag)}
+  >
+    {({ fetchMore, subscribeToMore, ...result }) => (
+      <View
+        {...result}
+        tag={tag}
+        onClickJob={job => history.push(`job/${job.id}`)}
+        onLoadMore={data => {
+          return fetchMore({
+            variables: {
+              lastId: data.jobs && data.jobs.length > 0 ? data.jobs[data.jobs.length - 1].id : null
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return prev;
+              return { ...prev, jobs: [...prev.jobs, ...fetchMoreResult.jobs] };
+            }
+          })
+        }
+        }
+        subscribeToNewJobs={() =>
+          subscribeToMore({
+            document: JOBS_SUBSCRIPTION,
+            updateQuery: (prev, { subscriptionData }) => {
+              if (!subscriptionData.data) return prev;
+              if (tag && !subscriptionData.data.jobAdded.tags.find(t => tag.title === t)) return prev;
 
-                            const newFeedItem = subscriptionData.data.jobAdded;
+              const newFeedItem = subscriptionData.data.jobAdded;
 
-                            return { ...prev, jobs: [newFeedItem, ...prev.jobs] };
-                        }
-                    })
-                }
-            />
-        )}
-    </Query>
+              return { ...prev, jobs: [newFeedItem, ...prev.jobs] };
+            }
+          })
+        }
+      />
+    )}
+  </Query>
 );
 
 export default withRouter(JobList);

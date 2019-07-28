@@ -39,6 +39,7 @@ const typeDefs = gql`
       userId: ID!
       tags: [String]
       dueDate: Date
+      image: String
     ): Job
   }
 
@@ -50,13 +51,14 @@ const typeDefs = gql`
       title: String!
       description: String
       tags: [String!]
+      image: String
   }
 
   type User {
     id: ID
-    createdDate: Date
     username: String
     displayName: String
+    avatar: String
   }
 
   type Bid {

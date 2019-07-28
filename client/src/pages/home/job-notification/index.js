@@ -9,7 +9,8 @@ export const JOBS_SUBSCRIPTION = gql`
     jobAdded {
       id
       title
-      tags
+      createdDate
+      description
     }
   }
 `;
@@ -25,9 +26,9 @@ export default () => {
   const onDataReceived = ({ subscriptionData: { data } }) => {
     addJob(data.jobAdded);
 
-    setTimeout(() => {
-      removeJob(data.jobAdded)
-    }, TIMEOUT);
+    // setTimeout(() => {
+    //   removeJob(data.jobAdded)
+    // }, TIMEOUT);
   }
 
   return (

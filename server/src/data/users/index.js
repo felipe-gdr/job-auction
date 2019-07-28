@@ -26,7 +26,18 @@ const getUser = ({
     }
 }
 
+const addUser = userData => {
+    return database.collection(COLLECTION)
+        .add(userData)
+        .then(docRef => {
+            return {
+                ...userData,
+                id: docRef.id,
+            }
+        });
+}
 
 module.exports = {
     getUser,
+    addUser,
 }

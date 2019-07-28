@@ -1,25 +1,35 @@
 import React, { useEffect } from 'react';
-import styled from '@emotion/styled';
-import Skeleton from 'react-loading-skeleton';
 
 import JobCard from './job-card';
 import { ListItem } from './styled';
 import Loading from './loading';
 
 export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag, onClickJob }) => {
-    useEffect(subscribeToNewJobs, [tag])
+    useEffect(subscribeToNewJobs, [tag, loading])
 
-    if (loading) return <Loading /> 
+    useEffect(() => {
+        if (loading) return;
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [loading, data]);
+
+    const handleScroll = () => {
+        if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+        onLoadMore(data);
+    };
+
+    if (loading) return <Loading />
     if (error) return <p>Error :(</p>;
 
-    return <div>
+    return <div onScroll={() => handleScroll(onLoadMore)}>
         {
             data.jobs.map(job => (
-                <ListItem>
-                    <JobCard key={job.id} job={job} onClick={onClickJob} />
+                <ListItem key={job.id} >
+                    <JobCard job={job} onClick={onClickJob} />
                 </ListItem>
             ))
         }
-        <button onClick={onLoadMore}>More.</button>
+        <button onClick={onLoadMore}>more</button>
     </div>
 }
