@@ -6,7 +6,7 @@ export default ({ job })=> (
         <p>{job.description}</p>
         <ul>
             {job.tags.map(tag => (
-                <li>{tag}</li>
+                <li key={tag}>{tag}</li>
             ))}
         </ul>
         <div>

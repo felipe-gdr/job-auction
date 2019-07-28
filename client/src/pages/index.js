@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './home';
 import Job from './job'
 
-
 export default () => (
     <Router>
         <div>
@@ -13,9 +12,6 @@ export default () => (
                 <ul>
                     <li>
                         <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/job/">Job</Link>
                     </li>
                 </ul>
             </nav>
