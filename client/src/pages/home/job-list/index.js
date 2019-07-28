@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
+import { withRouter } from 'react-router';
 
 import { JOBS_SUBSCRIPTION } from '../job-subscription';
 
@@ -30,7 +31,7 @@ const getQuery = tag => tag ? JOBS_BY_TAG_QUERY : JOBS_RECENT_QUERY;
 
 const getVariables = tag => tag ? { lastId: null, tag: tag.title } : { lastId: null };
 
-export default ({ tag }) => (
+const JobList = ({ tag, history }) => (
     <Query
         query={getQuery(tag)}
         variables={getVariables(tag)}
@@ -39,6 +40,7 @@ export default ({ tag }) => (
             <View
                 {...result}
                 tag={tag}
+                onClickJob={job => history.push(`job/${job.id}`)}
                 onLoadMore={() =>
                     fetchMore({
                         variables: {
@@ -67,3 +69,5 @@ export default ({ tag }) => (
         )}
     </Query>
 );
+
+export default withRouter(JobList);

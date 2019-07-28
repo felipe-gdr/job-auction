@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
+import styled from '@emotion/styled';
+import Skeleton from 'react-loading-skeleton';
 
-export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) => {
+import JobCard from './job-card';
+import { ListItem } from './styled';
+import Loading from './loading';
+
+export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag, onClickJob }) => {
     useEffect(subscribeToNewJobs, [tag])
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading /> 
     if (error) return <p>Error :(</p>;
 
     return <div>
         {
-            data.jobs.map(({ id, title }) => (
-                <Link to={`job/${id}`} key={id}>
-                    <p>{id}: {title}</p>
-                </Link>
+            data.jobs.map(job => (
+                <ListItem>
+                    <JobCard key={job.id} job={job} onClick={onClickJob} />
+                </ListItem>
             ))
         }
         <button onClick={onLoadMore}>More.</button>
