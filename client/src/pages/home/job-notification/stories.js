@@ -7,19 +7,18 @@ import { getJob } from '../../../common/mocks';
 import View from './view';
 
 const actions = {
-    onClick: action('onClick'),
+  onClick: action('onClick'),
 };
 
 const Container = ({ children }) => {
-    const [jobs, setJobs] = useState([getJob()]);
+    const [job, setJob] = useState(getJob());
 
-    const addJob = () => setJobs([...jobs, getJob()]);
-    const removeJob = job => setJobs(jobs.filter(j => j.id !== job.id));
+    const notifyJob = () => setJob(getJob());
 
     return (
         <div>
-            {children(jobs, removeJob)}
-            <button onClick={addJob}>add job </button>
+            {children(job)}
+            <button onClick={notifyJob}>Notifiy job </button>
         </div>
     )
 }
@@ -27,8 +26,8 @@ const Container = ({ children }) => {
 storiesOf('JobNotification', module)
     .add('default', () => {
         return <Container>
-            {(jobs, removeJob) =>
-                <View jobs={jobs} {...actions} onRemoveJob={removeJob} />
+            {job =>
+                <View job={job} {...actions} />
             }
         </Container>
     }); 

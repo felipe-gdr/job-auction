@@ -1,30 +1,56 @@
-import React, { useState } from 'react';
-import Toast from 'react-bootstrap/Toast'
+import React, { useState, useEffect } from 'react';
 
-import formatRelative from 'date-fns/formatRelative';
+import Snackbar from '@material-ui/core/Snackbar';
 
-const JobNotification = ({ job, onClose }) => {
-    const { title, description } = job;
-    const [show, setShow] = useState(true);
+import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+import Avatar from '@material-ui/core/Avatar';
 
-    const hide = () => {
-        setShow(false);
-        onClose(job);
-    };
+import useStyles from './styles';
+
+export default ({ job, onClick }) => {
+    const { id, title, description, user } = job;
+    const [open, setOpen] = useState(true);
+    const classes = useStyles();
+
+    useEffect(() => {
+        if (job) {
+            setOpen(true);
+        }
+    }, [job])
+
+    const handleClose = () => setOpen(false);
+    const handleClick = () => onClick(job);
 
     return (
-        <Toast show={show} onClose={hide}>
-            <Toast.Header>
-                <strong className="mr-auto">{title}</strong>
-                <small>{formatRelative(new Date(job.createdDate), new Date())}</small>
-            </Toast.Header>
-            <Toast.Body>{description}</Toast.Body>
-        </Toast>
+        <Snackbar
+            key={id}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            open={open}
+            autoHideDuration={6000}
+            onClose={handleClose}
+            ContentProps={{
+                'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id" className={classes.message}><Avatar src={user.avatar} />{title}</span>}
+            action={[
+                <Button key="go" color="secondary" size="small" onClick={handleClick}>
+                    GO
+                </Button>,
+                <IconButton
+                    key="close"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={handleClose}
+                >
+                    <CloseIcon />
+                </IconButton>,
+            ]}
+        />
     );
-}
-
-export default ({ jobs, onRemoveJob }) => {
-    return jobs.map(job => (
-        <JobNotification key={job.id} job={job} onClose={onRemoveJob} />
-    ))
 }

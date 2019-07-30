@@ -8,8 +8,14 @@ const resolverMap = {
         parseValue(valueFromClient) {
             return new Date(valueFromClient);
         },
-        serialize(valueFromFirebase) {
-            return valueFromFirebase.toMillis();
+        serialize(value) {
+            if(value instanceof Date) {
+                // value returned by the subscription is of type date
+                return value.getTime();
+            }
+
+            // value returned from firestore
+            return value.toMillis();
         },
         parseLiteral(astStringValue) {
             if (astStringValue.kind === Kind.INT) {

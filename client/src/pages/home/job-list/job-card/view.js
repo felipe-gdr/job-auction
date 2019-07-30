@@ -1,38 +1,78 @@
-import React, { useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import formatRelative from 'date-fns/formatRelative'
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
-import { CardContainer, BadgeContainer, DueDate } from './styled';
+import Tooltip from '@material-ui/core/Tooltip';
+import formatDistance from 'date-fns/formatDistance'
+import format from 'date-fns/format'
+import Chip from '@material-ui/core/Chip';
+import Badge from '@material-ui/core/Badge';
 
-export default ({ job, onClick }) => {
-    const { title, description, tags, user, dueDate, image, bidCount } = job;
+import useStyles from './styles';
 
-    const [hover, setHover] = useState(false);
+const descriptionMaxLength = 200;
 
-    const now = new Date(); 
+export default ({ job }) => {
+    const { title, description, dueDate, image, tags, bidCount, user } = job;
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+
+    function handleExpandClick() {
+        setExpanded(!expanded);
+    }
+
+    const now = new Date();
+
+    const summarizedDescription = description && 
+        `${description.substring(
+            0, Math.min(descriptionMaxLength, description.length))
+        }${description.length > descriptionMaxLength ? '...' : ''}`;
+
+    const dueIn = (
+        <Tooltip title={format(dueDate, 'Do MMM h:mma')} placement="right">
+            <span>{`due in ${formatDistance(dueDate, now)}`}</span>
+        </Tooltip>
+    )
 
     return (
-        <CardContainer
-            border={hover && 'info'}
-            onClick={() => onClick(job)}
-            onMouseOver={() => setHover(true)}
-            onMouseOut={() => setHover(false)}>
-            <Card.Header>{title}</Card.Header>
-            <Card.Body>
-                <Card.Subtitle>
-                    by {user.displayName} <DueDate>due {formatRelative(new Date(dueDate), now)}</DueDate>
-                </Card.Subtitle>
-                <Card.Img variant="top" src={image} />
-                <Card.Text>
-                    {description}
-                </Card.Text>
-            </Card.Body>
-            <Card.Footer>
-                {
-                    tags.map(tag => (<BadgeContainer key={tag} variant="info">{tag}</BadgeContainer>))
+        <Card className={classes.card}>
+            <CardHeader
+                classes={{
+                    action: classes.headerAction
+                }}
+                avatar={
+                    <Tooltip title={user.displayName} placement="top">
+                        <Avatar src={user.avatar} aria-label={user.displayName} className={classes.avatar} />
+                    </Tooltip>
                 }
-            </Card.Footer>
-        </CardContainer>
+                action={
+                    <Badge className={classes.margin} badgeContent={bidCount} max={10} color="primary">
+                        🔨
+                    </Badge>
+                }
+                title={title}
+                subheader={dueIn}
+            />
+            <CardMedia
+                className={classes.media}
+                image={image}
+            />
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {summarizedDescription}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                {tags.map(tag => (
+                    <Chip key={tag} size="small" label={tag} className={classes.chip} color="secondary" />
+                ))}
+            </CardActions>
+        </Card>
     );
-
 }

@@ -14,6 +14,7 @@ const resolvers = {
         jobsRecent: (root, args, context) => getRecentJobs(args),
         jobsByUser: (root, args, context) => getJobsByUser(args),
         jobsByTag: (root, args, context) => getJobsByTag(args),
+        // Use dataLoader to fetch users
         user: (root, args, context) => getUser(args),
         tags: (root, args, context) => getTags(args),
         job: (root, args, context) => getJob(args)
