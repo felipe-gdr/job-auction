@@ -18,7 +18,7 @@ import useStyles from './styles';
 
 const descriptionMaxLength = 200;
 
-export default ({ job }) => {
+export default ({ job, onClick }) => {
     const { title, description, dueDate, image, tags, bidCount, user } = job;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -40,8 +40,10 @@ export default ({ job }) => {
         </Tooltip>
     )
 
+    const handleClick = () => onClick(job);
+
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} onClick={handleClick}>
             <CardHeader
                 classes={{
                     action: classes.headerAction
