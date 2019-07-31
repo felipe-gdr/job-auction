@@ -1,94 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Avatar from '@material-ui/core/Avatar';
+
+import Badge from '@material-ui/core/Badge';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MailIcon from '@material-ui/icons/Mail';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+  postButton: {
+    marginLeft: theme.spacing(2),
   },
-  title: {
+  actions: {
     flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
 }));
 
-export default function MenuAppBar() {
+export default ({ users, onChangeLoggedInUser }) => {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  function handleChange(event) {
-    setAuth(event.target.checked);
-  }
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
-  function handleMenu(event) {
+  const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   }
 
-  function handleClose() {
+  const handleClose = () => {
     setAnchorEl(null);
+  }
+
+  const handleChangeLoggedInUser = user => {
+    setLoggedInUser(user);
+    onChangeLoggedInUser(user);
+    handleClose();
   }
 
   return (
     <div className={classes.root}>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Photos
+          <Typography variant="h6" >
+            Job Auction 🔨
           </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
+          <Fab
+            variant="extended"
+            color="primary"
+            aria-label="post job"
+            className={classes.postButton} color="secondary"
+          >
+            <AddIcon />
+            Post a Job
+          </Fab>
+          <div className={classes.actions}>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              {loggedInUser ?
+                <Avatar src={loggedInUser.avatar}>US</Avatar> :
                 <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
+              }
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+
+              {users.map(user => (
+                <MenuItem key={user.id} onClick={() => handleChangeLoggedInUser(user)}>
+                  <Avatar src={user.avatar} />
+                  {user.displayName}
+                </MenuItem>
+              ))}
+              {loggedInUser &&
+                <MenuItem onClick={() => handleChangeLoggedInUser(null)}>Log out</MenuItem>
+              }
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

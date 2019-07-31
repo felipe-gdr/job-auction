@@ -8,7 +8,7 @@ export default makeStyles(theme => ({
     errorPanel: {
         padding: 40,
         color: red[500],
-        width: 400,
+        width: 345,
         textAlign: 'center'
     }
 }));

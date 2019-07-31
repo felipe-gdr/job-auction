@@ -5,10 +5,18 @@ import { action } from '@storybook/addon-actions';
 import View from './view';
 
 const actions = {
-    onClick: action('onClick'),
+    onChangeLoggedInUser: action('onChangeLoggedInUser'),
 };
+
+const users = [
+    {
+        id: 1,
+        displayName: 'User 1',
+        avatar: 'https://robohash.org/maioresnequevoluptatem.jpg?size=50x50&set=set1'
+    }
+]
 
 storiesOf('Nav', module)
     .add('default', () => (
-        <View />
+        <View users={users} {...actions} />
     )); 
