@@ -7,8 +7,6 @@ import Skeleton from 'react-loading-skeleton';
 
 import useStyles from './styles';
 
-const descriptionMaxLength = 200;
-
 export default ({ job }) => {
     const classes = useStyles();
 

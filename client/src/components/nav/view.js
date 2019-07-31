@@ -11,7 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MailIcon from '@material-ui/icons/Mail';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -55,13 +54,13 @@ export default ({ users, onChangeLoggedInUser }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" >
-            Job Auction 🔨
+            Job Auction <span role="img" aria-label="hammer">🔨</span>
           </Typography>
           <Fab
             variant="extended"
-            color="primary"
             aria-label="post job"
-            className={classes.postButton} color="secondary"
+            className={classes.postButton} 
+            color="secondary"
           >
             <AddIcon />
             Post a Job

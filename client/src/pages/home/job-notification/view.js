@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,7 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import useStyles from './styles';
 
 export default ({ job, onClick }) => {
-    const { id, title, description, user } = job;
+    const { id, title, user } = job;
     const [open, setOpen] = useState(true);
     const classes = useStyles();
 

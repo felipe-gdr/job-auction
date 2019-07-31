@@ -10,12 +10,10 @@ const getImage = () => {
     return `${baseUrl}/${getRandomItem(IMG_CATEGORIES)}`;
 }
 
-const getTags = () => {
-    const tagCount = getRandomInt(1, 3);
-
+const getSomeTags = count => {
     const tags = [];
 
-    for (let x = 0; x < tagCount; x++) {
+    for (let x = 0; x < count; x++) {
         const tag = getRandomItem(TAGS);
 
         if(!tags.find(t => t === tag)) {
@@ -38,10 +36,15 @@ const transformDate = epoch => epoch * 1000;
 
 export const getJobs = () => jobs.slice(0, 10).map(job => ({ 
     ...job, 
-    tags: getTags(), 
+    tags: getSomeTags(getRandomInt(0, 3)), 
     image: getImage(), 
     createdDate: transformDate(job.createdDate),
     dueDate: transformDate(job.dueDate),
 }));
 
 export const getJob = () => getRandomItem(getJobs());
+
+export const getTags = () => TAGS.map((tag, idx) => ({
+    id: idx,
+    title: tag,
+}));

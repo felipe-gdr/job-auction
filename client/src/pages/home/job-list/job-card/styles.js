@@ -3,7 +3,7 @@ import { green } from '@material-ui/core/colors';
 
 export default makeStyles(theme => ({
     card: {
-        maxWidth: 345,
+        maxWidth: 420,
         cursor: 'pointer',
     },
     media: {
@@ -20,5 +20,18 @@ export default makeStyles(theme => ({
         marginTop: 5,
         marginRight: 5,
         fontSize: 24,
+    },
+    headerTitle: {
+        fontSize: 18,
+    },
+    detailItem: {
+        display: 'flex',
+        alignItems: 'center',
+        marginBottom: theme.spacing(2),
+        fontSize: 16
+    },
+    detailIcon: {
+        marginRight: theme.spacing(1),
     }
+
 }));

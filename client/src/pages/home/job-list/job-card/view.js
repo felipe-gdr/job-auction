@@ -1,52 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import Tooltip from '@material-ui/core/Tooltip';
-import formatDistance from 'date-fns/formatDistance'
 import format from 'date-fns/format'
 import Chip from '@material-ui/core/Chip';
 import Badge from '@material-ui/core/Badge';
+import CalendarIcon from '@material-ui/icons/CalendarToday';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
 
 import useStyles from './styles';
 
 const descriptionMaxLength = 200;
 
+const getSummarizedDescription = description => description &&
+    `${description.substring(
+        0, Math.min(descriptionMaxLength, description.length))
+    }${description.length > descriptionMaxLength ? '...' : ''}`;
+
+const DueIn = ({ date }) => (
+    <Tooltip title={format(date, 'Do MMM YYYY h:mma')} placement="right">
+        <span>{format(date, 'ddd, D MMM')}</span>
+    </Tooltip>
+)
 export default ({ job, onClick }) => {
-    const { title, description, dueDate, image, tags, bidCount, user } = job;
+    const { title, description, dueDate, tags, bidCount, user } = job;
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-
-    function handleExpandClick() {
-        setExpanded(!expanded);
-    }
-
-    const now = new Date();
-
-    const summarizedDescription = description && 
-        `${description.substring(
-            0, Math.min(descriptionMaxLength, description.length))
-        }${description.length > descriptionMaxLength ? '...' : ''}`;
-
-    const dueIn = (
-        <Tooltip title={format(dueDate, 'Do MMM h:mma')} placement="right">
-            <span>{`due in ${formatDistance(dueDate, now)}`}</span>
-        </Tooltip>
-    )
+    const [isHover, setHover] = useState(false);
 
     const handleClick = () => onClick(job);
 
+    const hoverIn = () => setHover(true);
+    const hoverOut = () => setHover(false);
+
     return (
-        <Card className={classes.card} onClick={handleClick}>
+        <Card
+            className={classes.card}
+            onClick={handleClick}
+            raised={isHover}
+            onMouseEnter={hoverIn}
+            onMouseLeave={hoverOut}
+        >
             <CardHeader
                 classes={{
-                    action: classes.headerAction
+                    action: classes.headerAction,
+                    title: classes.headerTitle
                 }}
                 avatar={
                     <Tooltip title={user.displayName} placement="top">
@@ -55,19 +57,20 @@ export default ({ job, onClick }) => {
                 }
                 action={
                     <Badge className={classes.margin} badgeContent={bidCount} max={10} color="primary">
-                        🔨
+                        <span role="img" arial-label="hammer">🔨</span>
                     </Badge>
                 }
                 title={title}
-                subheader={dueIn}
-            />
-            <CardMedia
-                className={classes.media}
-                image={image}
             />
             <CardContent>
+                <Typography variant="body2" color="textPrimary" component="div" className={classes.detailItem}>
+                    <MoneyIcon fontSize="small" className={classes.detailIcon} />$100 - 200
+                </Typography>
+                <Typography variant="body2" color="textPrimary" component="div" className={classes.detailItem}>
+                    <CalendarIcon fontSize="small" className={classes.detailIcon} /><DueIn date={dueDate} />
+                </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {summarizedDescription}
+                    {getSummarizedDescription(description)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -75,6 +78,6 @@ export default ({ job, onClick }) => {
                     <Chip key={tag} size="small" label={tag} className={classes.chip} color="secondary" />
                 ))}
             </CardActions>
-        </Card>
+        </Card >
     );
 }
