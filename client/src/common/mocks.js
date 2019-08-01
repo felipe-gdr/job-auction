@@ -1,4 +1,5 @@
-import jobs from './data.json';
+import jobs from './data/jobs.json';
+import bids from './data/bids.json';
 
 const TAGS = ['ikea-assembly', 'cleaner', 'handyman', 'mechanic', 'plumber', 'dog-walking', 'baby-sitting'];
 
@@ -16,7 +17,7 @@ const getSomeTags = count => {
     for (let x = 0; x < count; x++) {
         const tag = getRandomItem(TAGS);
 
-        if(!tags.find(t => t === tag)) {
+        if (!tags.find(t => t === tag)) {
             tags.push(tag);
         }
     }
@@ -34,10 +35,10 @@ const getRandomItem = array => {
 
 const transformDate = epoch => epoch * 1000;
 
-export const getJobs = () => jobs.slice(0, 10).map(job => ({ 
-    ...job, 
-    tags: getSomeTags(getRandomInt(0, 3)), 
-    image: getImage(), 
+export const getJobs = () => jobs.slice(0, 10).map(job => ({
+    ...job,
+    tags: getSomeTags(getRandomInt(0, 3)),
+    image: getImage(),
     createdDate: transformDate(job.createdDate),
     dueDate: transformDate(job.dueDate),
 }));
@@ -48,3 +49,5 @@ export const getTags = () => TAGS.map((tag, idx) => ({
     id: idx,
     title: tag,
 }));
+
+export const getBids = () => bids.map(bid => ({ ...bid, createdDate: transformDate(bid.createdDate) }));

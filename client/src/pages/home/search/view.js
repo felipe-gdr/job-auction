@@ -2,17 +2,7 @@ import React from 'react';
 
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    chip: {
-        margin: theme.spacing(0.5),
-    },
-}));
+import useStyles from './styles';
 
 const noop = () => {};
 
