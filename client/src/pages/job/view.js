@@ -106,7 +106,7 @@ export default ({ job, bids }) => {
                 <Follow />
             </Grid>
             <Grid item xs container direction="column" spacing={3}>
-                <Grid xs item>
+                <Grid item>
                     <Paper className={classes.section}>
                         <JobDetails job={job} />
                     </Paper>

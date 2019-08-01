@@ -11,6 +11,6 @@ const actions = {
     onClick: action('onClick'),
 };
 
-storiesOf('JobCard', module)
-    .add('default', () => <View job={getJob()} {...actions} />)
-    .add('loading', () => <Loading />);
+storiesOf('Job item to be displayed on the list', module)
+    .add('default state', () => <View job={getJob()} {...actions} />)
+    .add('loading state', () => <Loading />);

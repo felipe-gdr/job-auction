@@ -16,7 +16,7 @@ const users = [
     }
 ]
 
-storiesOf('Nav', module)
+storiesOf('Top menu', module)
     .add('default', () => (
         <View users={users} {...actions} />
     )); 

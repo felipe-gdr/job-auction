@@ -12,6 +12,6 @@ const actions = {
 
 const tags = getTags();
 
-storiesOf('Search', module)
-    .add('default', () => <View  {...actions} items={tags} />)
-    .add('with selected', () => <View  {...actions} items={tags} selected={tags[0]} />); 
+storiesOf('Search bar used to filter jobs', module)
+    .add('default state', () => <View  {...actions} items={tags} />)
+    .add('selected state', () => <View  {...actions} items={tags} selected={tags[0]} />); 

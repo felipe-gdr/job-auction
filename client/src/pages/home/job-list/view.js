@@ -26,11 +26,11 @@ export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) =
     if (loading) return <Loading />;
     if (error) return <Error />;
 
-    return <div onScroll={() => handleScroll(onLoadMore)}>
+    return <div>
         {
             data.jobs.map(job => (
                 <div key={job.id} className={classes.listItem}>
-                    <JobCard job={job}/>
+                    <JobCard job={job} />
                 </div>
             ))
         }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import { getJob } from '../../../common/mocks';
 
@@ -17,14 +19,17 @@ const Container = ({ children }) => {
 
     return (
         <div>
+            <Typography variant="h6">
+                Notification to user when a new job is created
+            </Typography>
             {children(job)}
-            <button onClick={notifyJob}>Notifiy job </button>
+            <Button variant="contained" onClick={notifyJob} >Simulate a new incoming job</Button>
         </div>
     )
 }
 
-storiesOf('JobNotification', module)
-    .add('default', () => {
+storiesOf('New job notification', module)
+    .add('default state', () => {
         return <Container>
             {job =>
                 <View job={job} {...actions} />

@@ -23,7 +23,7 @@ const getSummarizedDescription = description => description &&
     }${description.length > descriptionMaxLength ? '...' : ''}`;
 
 const DueIn = ({ date }) => (
-    <Tooltip title={format(date, 'Do MMM YYYY h:mma')} placement="right">
+    <Tooltip title={format(date, 'Do MMM YYYY h:mma')} placement="top">
         <span>{format(date, 'ddd, D MMM')}</span>
     </Tooltip>
 )
@@ -56,15 +56,20 @@ export default ({ job, onClick }) => {
                     </Tooltip>
                 }
                 action={
-                    <Badge className={classes.margin} badgeContent={bidCount} max={10} color="primary">
-                        <span role="img" arial-label="hammer">🔨</span>
-                    </Badge>
+                    <Tooltip title={`${bidCount} bids on this job`} placement="top">
+                        <Badge className={classes.margin} badgeContent={bidCount} max={10} color="primary">
+                            <span role="img" arial-label="hammer">🔨</span>
+                        </Badge>
+                    </Tooltip>
                 }
                 title={title}
             />
             <CardContent>
-                <Typography variant="body2" color="textPrimary" component="div" className={classes.detailItem}>
-                    <MoneyIcon fontSize="small" className={classes.detailIcon} />$100 - 200
+                <Typography variant="body2" color="textPrimary" component="span" className={classes.detailItem}>
+                    <MoneyIcon fontSize="small" className={classes.detailIcon} />
+                    <Tooltip title="Bids ranging from $100 to $200" placement="top">
+                        <span>$100 - 200</span>
+                    </Tooltip>
                 </Typography>
                 <Typography variant="body2" color="textPrimary" component="div" className={classes.detailItem}>
                     <CalendarIcon fontSize="small" className={classes.detailIcon} /><DueIn date={dueDate} />

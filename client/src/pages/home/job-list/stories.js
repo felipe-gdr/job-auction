@@ -13,8 +13,8 @@ const actions = {
   onClickJob: action('onClickJob'),
 };
 
-storiesOf('JobList', module)
+storiesOf('List of jobs', module)
   .addDecorator(StoryRouter())
-  .add('error', () => <View {...actions} error />)
-  .add('loading', () => <View {...actions} loading />)
-  .add('default', () => <View {...actions} data={{ jobs: getJobs() }} />)
+  .add('default state', () => <View {...actions} data={{ jobs: getJobs() }} />)
+  .add('loading state', () => <View {...actions} loading />)
+  .add('error state', () => <View {...actions} error />);
