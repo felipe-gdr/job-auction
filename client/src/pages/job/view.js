@@ -10,7 +10,7 @@ import JobDetails from './job-details';
 import Bids from './bids';
 import Follow from './follow';
 
-export default ({ job, bids }) => {
+export default ({ job }) => {
     const { title, description, tags, user, image, finished } = job;
 
     const classes = useStyles();
@@ -41,7 +41,7 @@ export default ({ job, bids }) => {
             </Grid>
             <Grid item xs={12} md={6}>
                 <Paper className={`${classes.section} ${classes.bidsContainer}`}>
-                    <Bids bids={bids} finished={finished}/>
+                    <Bids finished={finished}/>
                 </Paper>
             </Grid>
         </Grid>

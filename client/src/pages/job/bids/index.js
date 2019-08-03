@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import Bids from './view';
-import Empty from './empty';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 
-export default props =>
-    props.bids && props.bids.length > 0
-        ? <Bids {...props} />
-        : <Empty />;
+import View from './view';
+import { JobContext } from '../../../contexts/job-context';
+
+export const BIDS_QUERY = gql`
+    query($jobId: ID!) {
+        bids(jobId: jobId) {
+            id
+            price
+            comment
+            createdDate
+            user {
+                displayName
+                avatar
+            }
+        }
+    }
+`;
+
+export default props => {
+    const { job: { id } } = useContext(JobContext);
+    return (
+        <Query
+            query={BIDS_QUERY}
+        >
+            {({ loading, data }) => {
+                if (loading) return null;
+
+                return (
+                    <View {...props} bids={data.bids} />
+                )
+            }}
+        </Query>
+
+    );
+}
