@@ -1,6 +1,5 @@
 import React from 'react';
 
-import AddTags from './view';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 

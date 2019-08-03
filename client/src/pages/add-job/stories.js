@@ -19,7 +19,6 @@ const mocks = [
   {
     request: {
       query: TAGS_QUERY,
-      variables: {}
     },
     result: {
       data: {
