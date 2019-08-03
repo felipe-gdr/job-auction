@@ -25,7 +25,7 @@ export default ({ job, bids }) => {
             <Grid item xs={3} className={classes.actions}>
                 <Follow />
             </Grid>
-            <Grid item xs container direction="column" spacing={3}>
+            <Grid item xs={12} md={6}  container direction="column" spacing={3}>
                 <Grid item>
                     <Paper className={classes.section}>
                         <JobDetails job={job} />
@@ -39,7 +39,7 @@ export default ({ job, bids }) => {
                     </Paper>
                 </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <Paper className={`${classes.section} ${classes.bidsContainer}`}>
                     <Bids bids={bids} finished={finished}/>
                 </Paper>

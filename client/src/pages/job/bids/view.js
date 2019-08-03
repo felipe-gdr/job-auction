@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,11 +8,14 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
+import { Tooltip } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/AttachMoney';
+import IconButton from '@material-ui/core/IconButton';
 import formatDistance from 'date-fns/formatDistance';
 
 import useStyles from './styles';
-import { Tooltip } from '@material-ui/core';
+
+import AddBid from './add-bid/view';
 
 export default ({ bids, finished }) => {
   const classes = useStyles();
@@ -20,16 +23,12 @@ export default ({ bids, finished }) => {
 
   return (
     <>
-      {finished ?
-        null :
-        (
+      {finished
+        ? null
+        : (
           <>
-            <div className={classes.addBid}>
-              <Tooltip title="Bid!" >
-                <Fab color="primary" aria-label="add" className={classes.noBidButton}>
-                  <MoneyIcon />
-                </Fab>
-              </Tooltip>
+            <div className={classes.addBidContainer}>
+              <AddBid />
             </div>
             <Divider variant="fullWidth" component="div" />
           </>
@@ -50,7 +49,7 @@ export default ({ bids, finished }) => {
                       <Typography variant="h6">
                         ${price}
                       </Typography>
-                      <Typography variant="div" color="textSecondary">
+                      <Typography component="div" color="textSecondary">
                         {formatDistance(createdDate, now)} ago
                     </Typography>
                     </div>
