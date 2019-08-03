@@ -5,8 +5,8 @@ import { action } from '@storybook/addon-actions';
 import View from './view';
 
 const actions = {
-  onSubmit: action('onSubmit'),
+  onSave: action('onSave'),
 };
 
-storiesOf('Job Page|Add bid form', module)
+storiesOf('Add Job Page|Add images for a job', module)
     .add('default state', () => <View {...actions} />)

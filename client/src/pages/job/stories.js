@@ -9,7 +9,7 @@ import View from './view';
 const job = getJob();
 const bids = getBids();
 
-storiesOf('Job details page', module)
+storiesOf('Job Page|Job details page', module)
     .add('default state', () => <View job={job} bids={bids}/>)
     .add('job with no bids', () => <View job={job} bids={[]}/>)
     .add('finished job', () =>

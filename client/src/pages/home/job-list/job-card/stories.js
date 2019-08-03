@@ -11,6 +11,6 @@ const actions = {
     onClick: action('onClick'),
 };
 
-storiesOf('Job item to be displayed on the list', module)
+storiesOf('Home Page|Job item to be displayed on the list', module)
     .add('default state', () => <View job={getJob()} {...actions} />)
     .add('loading state', () => <Loading />);

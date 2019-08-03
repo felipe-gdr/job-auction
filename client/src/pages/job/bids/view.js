@@ -38,7 +38,7 @@ export default ({ bids, finished }) => {
         {bids.map(bid => {
           const { user: { displayName, avatar }, price, createdDate, comment } = bid;
           return (
-            <>
+            <div key={bid.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt={bid.user.displayName} src={bid.user.avatar} />
@@ -66,7 +66,7 @@ export default ({ bids, finished }) => {
                 />
               </ListItem>
               <Divider variant="inset" component="li" />
-            </>
+            </div>
           )
         })}
       </List>

@@ -28,7 +28,7 @@ const Container = ({ children }) => {
     )
 }
 
-storiesOf('New job notification', module)
+storiesOf('Home Page|New job notification', module)
     .add('default state', () => {
         return <Container>
             {job =>
