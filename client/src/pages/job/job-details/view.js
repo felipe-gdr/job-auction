@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,12 +9,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import formatDistance from 'date-fns/formatDistance';
-import CalendarIcon from '@material-ui/icons/CalendarToday';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
-import CheckIcon from '@material-ui/icons/Check';
-import NotFollowingIcon from '@material-ui/icons/RemoveRedEyeOutlined';
-import FollowingIcon from '@material-ui/icons/RemoveRedEye';
-import Fab from '@material-ui/core/Fab';
 
 import useStyles from './styles';
 

@@ -14,6 +14,8 @@ const JOB_QUERY = gql`
       dueDate
       createdDate
       tags
+      finished
+      winningBid
       user {
           username
           displayName

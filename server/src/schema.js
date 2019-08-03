@@ -7,25 +7,29 @@ const typeDefs = gql`
       jobsRecent(
         limit: Int
         startAfter: ID
-      ) : [Job]
+      ) : [Job!]!
 
       jobsByTag(
         tag: String!
         limit: Int
         startAfter: ID
-      ) : [Job]
+      ) : [Job!]!
 
       jobsByUser(
         userId: ID!
         limit: Int
         startAfter: ID
-      ) : [Job]
+      ) : [Job!]!
 
       user(username: String id: ID): User 
 
-      tags(query: String): [Tag]!
+      tags(query: String): [Tag!]!
 
       job(id: ID!): Job
+
+      watchList(jobId: ID): [Job!]!
+
+      bids(jobId: ID!): [Bid!]!
   }
 
   type Subscription {
@@ -52,6 +56,8 @@ const typeDefs = gql`
       description: String
       tags: [String!]
       image: String
+      finished: Boolean
+      winningBid: Float
   }
 
   type User {
@@ -66,7 +72,8 @@ const typeDefs = gql`
     createdDate: Date!
     user: User! 
     job: Job! 
-    offer: Float!
+    price: Float!
+    comment: String
   }
 
   type Tag {
