@@ -58,7 +58,7 @@ export default ({ job, onClick }) => {
                 action={
                     <Tooltip title={`${bidCount} bids on this job`} placement="top">
                         <Badge className={classes.margin} badgeContent={bidCount} max={10} color="primary">
-                            <span role="img" arial-label="hammer">🔨</span>
+                            <span role="img" aria-label="hammer">🔨</span>
                         </Badge>
                     </Tooltip>
                 }

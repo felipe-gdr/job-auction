@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { MockedProvider } from 'react-apollo/test-utils';
 
 import { getJob, getBids } from '../../common/mocks';
@@ -29,6 +28,9 @@ const watchListMock = {
 const bidsMock = {
     request: {
         query: BIDS_QUERY,
+        variables: {
+            jobId: job.id
+        }
     },
     result: {
         data: {
@@ -40,6 +42,9 @@ const bidsMock = {
 const emptyBidsMock = {
     request: {
         query: BIDS_QUERY,
+        variables: {
+            jobId: job.id
+        }
     },
     result: {
         data: {
@@ -64,7 +69,7 @@ storiesOf('Job Page|Job details page', module)
 storiesOf('Job Page|Job details page', module)
     .addDecorator(story => (
         <JobProvider initialValue={job}>
-            <MockedProvider mocks={[watchListMock, bidsMock]} addTypename={false}>
+            <MockedProvider mocks={[watchListMock, emptyBidsMock]} addTypename={false}>
                 {story()}
             </MockedProvider>
         </JobProvider>

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Fab from '@material-ui/core/Fab';
-import MoneyIcon from '@material-ui/icons/AttachMoney';
 import { Typography } from '@material-ui/core';
 
 import useStyles from './styles';

@@ -26,6 +26,7 @@ export default props => {
     return (
         <Query
             query={BIDS_QUERY}
+            variables={{ jobId: id }}
         >
             {({ loading, data }) => {
                 if (loading) return null;
