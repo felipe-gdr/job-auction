@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { MockedProvider } from 'react-apollo/test-utils';
 
 import { getJob, getBids } from '../../common/mocks';
+import { Provider as JobProvider } from '../../contexts/job-context';
 
 import View from './view';
 import { WATCH_LIST_QUERY } from './follow';
@@ -19,7 +20,7 @@ const mocks = [
         result: {
             data: {
                 watchList: [
-                    { id: 1 }, { id: 2 }
+                    { id: job.id }
                 ]
             }
         }
@@ -28,9 +29,11 @@ const mocks = [
 
 storiesOf('Job Page|Job details page', module)
     .addDecorator(story => (
-        <MockedProvider mocks={mocks} addTypename={false}>
-            {story()}
-        </MockedProvider>
+        <JobProvider initialValue={job}>
+            <MockedProvider mocks={mocks} addTypename={false}>
+                {story()}
+            </MockedProvider>
+        </JobProvider>
     ))
     .add('default state', () => <View job={job} bids={bids} />)
     .add('job with no bids', () => <View job={job} bids={[]} />)
