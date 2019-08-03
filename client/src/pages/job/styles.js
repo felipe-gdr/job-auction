@@ -13,6 +13,7 @@ export default makeStyles(theme => ({
     section: {
         padding: theme.spacing(2),
         color: theme.palette.text.primary,
+        minHeight: 100,
     },
     userAvatar: {
         backgroundColor: green[300],
@@ -27,6 +28,7 @@ export default makeStyles(theme => ({
         backgroundColor: blue[900],
     },
     bidsContainer: {
+        minHeight: 200,
         maxHeight: 500,
         overflow: 'auto',
     },

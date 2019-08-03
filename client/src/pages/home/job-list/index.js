@@ -12,6 +12,7 @@ const JOBS_FRAGMENT = `
   tags 
   dueDate
   image
+  bidCount
   user {
     username
     displayName
@@ -19,7 +20,7 @@ const JOBS_FRAGMENT = `
   }
 `
 
-const JOBS_RECENT_QUERY = gql`
+export const JOBS_RECENT_QUERY = gql`
   query ($lastId: ID) {
     jobs:jobsRecent(startAfter: $lastId) {
       ${JOBS_FRAGMENT}
@@ -27,7 +28,7 @@ const JOBS_RECENT_QUERY = gql`
   }
 `;
 
-const JOBS_BY_TAG_QUERY = gql`
+export const JOBS_BY_TAG_QUERY = gql`
   query ($lastId: ID, $tag: String!) {
     jobs:jobsByTag(startAfter: $lastId, tag: $tag) {
       ${JOBS_FRAGMENT}
@@ -58,13 +59,12 @@ export default ({ tag }) => (
               return { ...prev, jobs: [...prev.jobs, ...fetchMoreResult.jobs] };
             }
           })
-        }
-        }
+        }}
         subscribeToNewJobs={() =>
           subscribeToMore({
             document: JOBS_SUBSCRIPTION,
             updateQuery: (prev, { subscriptionData }) => {
-              if (!subscriptionData.data) return prev;
+              if (!subscriptionData.data || !subscriptionData.data.jobAdded) return prev;
               if (tag && !subscriptionData.data.jobAdded.tags.find(t => tag.title === t)) return prev;
 
               const newFeedItem = subscriptionData.data.jobAdded;

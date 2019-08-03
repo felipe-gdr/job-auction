@@ -4,7 +4,7 @@ import { gql } from "apollo-boost";
 
 import View from './view';
 
-const TAGS_QUERY = gql`
+export const TAGS_QUERY = gql`
   query {
     tags {
       id

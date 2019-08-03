@@ -7,6 +7,8 @@ import View from './view';
 
 import { getJobs } from '../../../common/mocks';
 
+const jobs = getJobs();
+
 const actions = {
   subscribeToNewJobs: action('subscribeToNewJobs'),
   onLoadMore: action('onLoadMore'),
@@ -15,6 +17,6 @@ const actions = {
 
 storiesOf('Home Page|List of jobs', module)
   .addDecorator(StoryRouter())
-  .add('default state', () => <View {...actions} data={{ jobs: getJobs() }} />)
+  .add('default state', () => <View {...actions} data={{ jobs }} />)
   .add('loading state', () => <View {...actions} loading />)
   .add('error state', () => <View {...actions} error />);
