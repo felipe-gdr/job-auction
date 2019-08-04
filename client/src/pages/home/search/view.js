@@ -4,7 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import useStyles from './styles';
 
-const noop = () => {};
+const noop = () => { };
 
 export default ({ items, onSelect, selected }) => {
     const classes = useStyles();
@@ -13,7 +13,7 @@ export default ({ items, onSelect, selected }) => {
         <div className={classes.root}>
             {items.map(tag => {
                 const { id, title } = tag;
-                const handleClick = () => onSelect(tag);
+                const handleClick = () => onSelect(selected ? null : tag);
                 const isSelected = selected && selected.id === tag.id;
                 const color = isSelected ? 'secondary' : 'primary';
 

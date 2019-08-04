@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 
+import {  JobContext } from '../../contexts/job-context';
 import View from './view';
-import { JobContext } from '../../contexts/job-context';
 
 const JOB_QUERY = gql`
   query($id: ID!) {
@@ -25,7 +25,7 @@ const JOB_QUERY = gql`
 `;
 
 export default ({ match: { params: { id } } }) => {
-  const { setJob } = useContext(JobContext);
+  const { job, setJob } = useContext(JobContext);
 
   return (
     <Query
@@ -36,9 +36,10 @@ export default ({ match: { params: { id } } }) => {
 
         setJob(data.job);
 
-        return (
-          <View job={data.job} />
-        )
+
+        return job ? (
+          <View job={job} />
+        ) : null
       }}
     </Query>
   );

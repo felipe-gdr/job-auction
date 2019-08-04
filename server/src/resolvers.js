@@ -17,10 +17,12 @@ const resolvers = {
         // Use dataLoader to fetch users
         user: (root, args, context) => getUser(args),
         tags: (root, args, context) => getTags(args),
-        job: (root, args, context) => getJob(args)
+        job: (root, args, context) => getJob(args),
+        watchList: (root, args, context) => [],
     },
     Job: {
         user: job => getUser({ id: job.userId }),
+        bids: job => [],
     },
     Subscription: {
         jobAdded: {

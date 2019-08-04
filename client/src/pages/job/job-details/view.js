@@ -15,7 +15,7 @@ import useStyles from './styles';
 import JobStatus from './job-status';
 
 export default ({ job }) => {
-    const { title, description, tags, user, createdDate, dueDate, image, finished } = job;
+    const { user, createdDate } = job;
     const classes = useStyles();
 
     const now = new Date();

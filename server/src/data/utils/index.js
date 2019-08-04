@@ -12,8 +12,8 @@ const executeCollectionQuery = ref =>
 
             querySnapshot.forEach(doc => {
                 documents.push({
+                    ...doc.data(),
                     id: doc.id,
-                    ...doc.data()
                 });
             });
 

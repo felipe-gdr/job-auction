@@ -1,7 +1,6 @@
 import jobs from './data/jobs.json';
 import bids from './data/bids.json';
-
-const TAGS = ['ikea-assembly', 'cleaner', 'handyman', 'mechanic', 'plumber', 'dog-walking', 'baby-sitting'];
+import tags from './data/tags.json';
 
 const IMG_CATEGORIES = ['tech', 'arch', 'people'];
 
@@ -12,17 +11,17 @@ const getImage = () => {
 }
 
 const getSomeTags = count => {
-    const tags = [];
+    const someTags = [];
 
     for (let x = 0; x < count; x++) {
-        const tag = getRandomItem(TAGS);
+        const tag = getRandomItem(tags);
 
-        if (!tags.find(t => t === tag)) {
-            tags.push(tag);
+        if (!someTags.find(t => t === tag)) {
+            someTags.push(tag);
         }
     }
 
-    return tags;
+    return someTags;
 };
 
 const getRandomInt = (min, max) =>
@@ -45,7 +44,7 @@ export const getJobs = () => jobs.slice(0, 10).map(job => ({
 
 export const getJob = () => getRandomItem(getJobs());
 
-export const getTags = () => TAGS.map((tag, idx) => ({
+export const getTags = () => tags.map((tag, idx) => ({
     id: idx,
     title: tag,
 }));

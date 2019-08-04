@@ -28,8 +28,6 @@ const typeDefs = gql`
       job(id: ID!): Job
 
       watchList(jobId: ID): [Job!]!
-
-      bids(jobId: ID!): [Bid!]!
   }
 
   type Subscription {
@@ -58,6 +56,8 @@ const typeDefs = gql`
       image: String
       finished: Boolean
       winningBid: Float
+      bidCount: Int
+      bids: [Bid!]!
   }
 
   type User {

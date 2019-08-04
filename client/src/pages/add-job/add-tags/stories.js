@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { MockedProvider } from 'react-apollo/test-utils';
 
 import { getTags } from '../../../common/mocks';
 

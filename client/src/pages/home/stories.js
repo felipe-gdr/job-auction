@@ -1,15 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { MockedProvider } from 'react-apollo/test-utils';
 
 import Home from './view';
 import { TAGS_QUERY } from './search';
 import { JOBS_SUBSCRIPTION } from './job-notification';
 import { JOBS_RECENT_QUERY } from './job-list';
-import { Provider as JobProvider } from '../../contexts/job-context';
 
 import { getTags, getJobs } from '../../common/mocks';
+import { withJobProvider, withApolloProvider } from '../../common/test/providers';
 
 const tags = getTags();
 const jobs = getJobs();
@@ -69,10 +68,6 @@ const mocks = [
 
 storiesOf('Home Page|Main', module)
   .addDecorator(StoryRouter())
-  .addDecorator(story => <JobProvider>{story()}</JobProvider>)
-  .addDecorator(story => (
-    <MockedProvider mocks={mocks} addTypename={false}>
-      {story()}
-    </MockedProvider>
-  ))
+  .addDecorator(withJobProvider())
+  .addDecorator(withApolloProvider(mocks))
   .add('default state', () => <Home />);

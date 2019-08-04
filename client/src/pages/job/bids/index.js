@@ -8,14 +8,16 @@ import { JobContext } from '../../../contexts/job-context';
 
 export const BIDS_QUERY = gql`
     query($jobId: ID!) {
-        bids(jobId: jobId) {
-            id
-            price
-            comment
-            createdDate
-            user {
-                displayName
-                avatar
+        job(id: $jobId) {
+            bids {
+                id
+                price
+                comment
+                createdDate
+                user {
+                    displayName
+                    avatar
+                }
             }
         }
     }
@@ -32,7 +34,7 @@ export default props => {
                 if (loading) return null;
 
                 return (
-                    <View {...props} bids={data.bids} />
+                    <View {...props} bids={data && data.job ? data.job.bids : []} />
                 )
             }}
         </Query>

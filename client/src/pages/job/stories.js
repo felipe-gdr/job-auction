@@ -1,9 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { MockedProvider } from 'react-apollo/test-utils';
 
 import { getJob, getBids } from '../../common/mocks';
-import { Provider as JobProvider } from '../../contexts/job-context';
+import { withApolloProvider, withJobProvider } from '../../common/test/providers';
 
 import View from './view';
 import { WATCH_LIST_QUERY } from './follow';
@@ -34,7 +33,9 @@ const bidsMock = {
     },
     result: {
         data: {
-            bids
+            job: {
+                bids,
+            }
         }
     }
 }
@@ -48,30 +49,22 @@ const emptyBidsMock = {
     },
     result: {
         data: {
-            bids: []
+            job: {
+                bids: [],
+            },
         }
     }
 }
 
 storiesOf('Job Page|Job details page', module)
-    .addDecorator(story => (
-        <JobProvider initialValue={job}>
-            <MockedProvider mocks={[watchListMock, bidsMock]} addTypename={false}>
-                {story()}
-            </MockedProvider>
-        </JobProvider>
-    ))
+    .addDecorator(withJobProvider(job))
+    .addDecorator(withApolloProvider([watchListMock, bidsMock]))
     .add('default state', () => <View job={job} />)
     .add('finished job', () =>
         <View job={{ ...job, finished: true, winingBid: { price: 49.9 } }} bids={bids} />
     );
 
 storiesOf('Job Page|Job details page', module)
-    .addDecorator(story => (
-        <JobProvider initialValue={job}>
-            <MockedProvider mocks={[watchListMock, emptyBidsMock]} addTypename={false}>
-                {story()}
-            </MockedProvider>
-        </JobProvider>
-    ))
+    .addDecorator(withJobProvider(job))
+    .addDecorator(withApolloProvider([watchListMock, emptyBidsMock]))
     .add('job with no bids', () => <View job={job} />)

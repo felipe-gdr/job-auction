@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,19 +15,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  postButton: {
-    marginLeft: theme.spacing(2),
-  },
-  actions: {
-    flexGrow: 1,
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-}));
+import useStyles from './styles';
 
 export default ({ users, onChangeLoggedInUser }) => {
   const classes = useStyles();
@@ -53,9 +42,11 @@ export default ({ users, onChangeLoggedInUser }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" >
-            Job Auction <span role="img" aria-label="hammer">🔨</span>
-          </Typography>
+          <Link to="/" className={classes.homeLink}>
+            <Typography variant="h6" >
+              Job Auction <span role="img" aria-label="hammer">🔨</span>
+            </Typography>
+          </Link>
           <Fab
             variant="extended"
             aria-label="post job"

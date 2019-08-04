@@ -1,5 +1,6 @@
 const database = require('../database');
 const { toGraphQLObj, applyStartAfterAndExecute } = require('../utils');
+const FieldValue = require('firebase-admin').firestore.FieldValue;
 
 const COLLECTION = 'jobs';
 const DEFAULT_LIMIT = 10;
@@ -63,6 +64,14 @@ const addJob = (jobData) => {
         });
 }
 
+const updateJob = (jobData) => {
+    const { id, ...otherData } = jobData;
+
+    return database.collection(COLLECTION).doc(id)
+        .update({...otherData })
+        .then(() => jobData);
+}
+
 const getJob = ({
     id,
 } = {}) => {
@@ -78,5 +87,6 @@ module.exports = {
     getJobsByUser,
     getJobsByTag,
     addJob,
+    updateJob,
     getJob
 }

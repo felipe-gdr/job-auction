@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import StoryRouter from 'storybook-react-router';
 
 import View from './view';
 
@@ -17,6 +18,7 @@ const users = [
 ]
 
 storiesOf('Components|Top menu', module)
+    .addDecorator(StoryRouter())
     .add('default', () => (
         <View users={users} {...actions} />
     )); 

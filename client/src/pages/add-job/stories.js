@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { MockedProvider } from 'react-apollo/test-utils';
 
 import View from './view';
 
 import { TAGS_QUERY } from './add-tags';
 
 import { getTags } from '../../common/mocks';
+import { withApolloProvider } from '../../common/test/providers'
 
 const actions = {
   onSubmit: action('onSubmit'),
@@ -29,9 +29,5 @@ const mocks = [
 ];
 
 storiesOf('Add Job Page|Add job form', module)
-  .addDecorator(story => (
-    <MockedProvider mocks={mocks} addTypename={false}>
-      {story()}
-    </MockedProvider>
-  ))
-  .add('default state', () => <View {...actions} />)
+  .addDecorator(withApolloProvider(mocks))
+  .add('default state', () => <View {...actions} />);

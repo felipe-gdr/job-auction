@@ -1,22 +1,24 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
 import useStyles from './styles';
+import useStylesCommon from '../../common/styles';
 
 import JobDetails from './job-details';
 import Bids from './bids';
 import Follow from './follow';
 
 export default ({ job }) => {
-    const { title, description, tags, user, image, finished } = job;
+    const { title, description, finished } = job;
 
     const classes = useStyles();
+    const classesCommon = useStylesCommon();
 
     return (
-        <Grid container spacing={3} className={classes.root}>
+        <Grid container spacing={3} className={`${classes.root} ${classesCommon.pageRoot}`}>
             <Grid item xs={9}>
                 <Typography variant="h4" className={classes.title}>
                     {title}
