@@ -25,7 +25,8 @@ export default ({ onSubmit, onClose }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        onSubmit(values);
+        onSubmit({ ...values, price: Number(values.price) });
+        onClose();
     }
 
     return (

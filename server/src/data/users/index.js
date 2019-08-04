@@ -1,5 +1,5 @@
 const database = require('../database');
-const { toGraphQLObj } = require('../utils');
+const { toGraphQLObj, executeCollectionQuery } = require('../utils');
 
 const COLLECTION = 'users';
 
@@ -26,6 +26,8 @@ const getUser = ({
     }
 }
 
+getUsers = () => executeCollectionQuery(database.collection('users'));
+
 const addUser = userData => {
     return database.collection(COLLECTION)
         .add(userData)
@@ -39,5 +41,6 @@ const addUser = userData => {
 
 module.exports = {
     getUser,
+    getUsers,
     addUser,
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,12 +16,10 @@ import AddIcon from '@material-ui/icons/Add';
 
 import useStyles from './styles';
 
-export default ({ users, onChangeLoggedInUser }) => {
+export default ({ users, onChangeLoggedInUser, loggedInUser }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -33,7 +30,6 @@ export default ({ users, onChangeLoggedInUser }) => {
   }
 
   const handleChangeLoggedInUser = user => {
-    setLoggedInUser(user);
     onChangeLoggedInUser(user);
     handleClose();
   }
@@ -42,20 +38,22 @@ export default ({ users, onChangeLoggedInUser }) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/" className={classes.homeLink}>
+          <Link to="/" className={classes.link}>
             <Typography variant="h6" >
               Job Auction <span role="img" aria-label="hammer">🔨</span>
             </Typography>
           </Link>
-          <Fab
-            variant="extended"
-            aria-label="post job"
-            className={classes.postButton} 
-            color="secondary"
-          >
-            <AddIcon />
-            Post a Job
-          </Fab>
+          <Link to="/add-job" className={classes.link}>
+            <Fab
+              variant="extended"
+              aria-label="post job"
+              className={classes.postButton}
+              color="secondary"
+            >
+              <AddIcon />
+              Post a Job
+            </Fab>
+          </Link>
           <div className={classes.actions}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">

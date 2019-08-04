@@ -12,7 +12,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'flex-end'
   },
-  homeLink: {
+  link: {
       textDecoration: 'none',
       color: 'inherit',
   }

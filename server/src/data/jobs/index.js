@@ -83,6 +83,7 @@ const getJob = ({
 }
 
 module.exports = {
+    collection: COLLECTION,
     getRecentJobs,
     getJobsByUser,
     getJobsByTag,

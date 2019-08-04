@@ -10,7 +10,7 @@ import formatDistance from 'date-fns/formatDistance';
 
 import useStyles from './styles';
 
-import AddBid from './add-bid/view';
+import AddBid from './add-bid';
 
 export default ({ bids, finished }) => {
   const classes = useStyles();

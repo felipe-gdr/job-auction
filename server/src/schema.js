@@ -23,6 +23,8 @@ const typeDefs = gql`
 
       user(username: String id: ID): User 
 
+      users: [User!]!
+
       tags(query: String): [Tag!]!
 
       job(id: ID!): Job
@@ -32,6 +34,7 @@ const typeDefs = gql`
 
   type Subscription {
     jobAdded: Job
+    bidAdded: Bid
   }
 
   type Mutation {
@@ -43,6 +46,13 @@ const typeDefs = gql`
       dueDate: Date
       image: String
     ): Job
+
+    addBid(
+      userId: ID!
+      jobId: ID!
+      price: Float!
+      comment: String
+    ): Bid
   }
 
   type Job {
