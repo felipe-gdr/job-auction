@@ -25,7 +25,7 @@ export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) =
 
     const classes = useStyles();
 
-    if (loading) return <Loading />;
+    if (loading && !data.jobs) return <Loading />;
     if (error) return <Error />;
 
     return <div>

@@ -5,6 +5,8 @@ import { Query } from 'react-apollo';
 
 import View from './view';
 import { JobContext } from '../../../contexts/job-context';
+import { UserContext } from '../../../contexts/user-context';
+import { BIDS_SUBSCRIPTION } from '../bid-notification'
 
 export const BID_FRAGMENT = `
     id
@@ -12,6 +14,7 @@ export const BID_FRAGMENT = `
     comment
     createdDate
     user {
+        id
         displayName
         avatar
     }
@@ -29,18 +32,35 @@ export const BIDS_QUERY = gql`
 `;
 
 export default props => {
-    const { job: { id } } = useContext(JobContext);
+    const { job } = useContext(JobContext);
+    const { user } = useContext(UserContext);
     return (
         <Query
             query={BIDS_QUERY}
-            variables={{ jobId: id }}
+            variables={{ jobId: job.id }}
         >
-            {(result) => {
-                if (result.loading) return null;
-                const { data } = result;
+            {({ loading, data, subscribeToMore }) => {
+                if (loading) return null;
 
                 return (
-                    <View {...props} bids={data && data.job ? data.job.bids : []} />
+                    <View
+                        {...props}
+                        bids={data && data.job ? data.job.bids : []}
+                        subscribeToNewBids={() =>
+                            subscribeToMore({
+                                document: BIDS_SUBSCRIPTION,
+                                updateQuery: (prev, { subscriptionData }) => {
+                                    if (!subscriptionData.data || !subscriptionData.data.bidAdded) return prev;
+                                    if (subscriptionData.data.bidAdded.user.id === user.id) return prev;
+                                    if (subscriptionData.data.bidAdded.job.id !== job.id) return prev;
+
+                                    const updatedJob = { ...prev.job, bids: [subscriptionData.data.bidAdded, ...prev.job.bids, ] }
+
+                                    return { ...prev, job: updatedJob };
+                                }
+                            })
+                        }
+                    />
                 )
             }}
         </Query>

@@ -1,10 +1,10 @@
 const { PubSub } = require('apollo-server');
 
-const { 
-    getRecentJobs, 
-    getJobsByUser, 
-    getJobsByTag, 
-    addJob, 
+const {
+    getRecentJobs,
+    getJobsByUser,
+    getJobsByTag,
+    addJob,
     getJob,
 } = require('./data/jobs');
 const { addBid, getBids } = require('./data/bids');
@@ -32,10 +32,11 @@ const resolvers = {
     },
     Job: {
         user: job => getUser({ id: job.userId }),
-        bids: job => getBids({jobId: job.id}),
+        bids: job => getBids({ jobId: job.id }),
     },
     Bid: {
         user: bid => getUser({ id: bid.userId }),
+        job: bid => getJob({ id: bid.jobId })
     },
     Subscription: {
         jobAdded: {
@@ -54,7 +55,7 @@ const resolvers = {
         },
         addBid: (root, args, context) => {
             return addBid(args).then(bid => {
-                pubsub.publish(BID_ADDED, { bidAdded: bid });
+                pubsub.publish(BID_ADDED, { bidAdded: { ...bid, jobId: args.jobId } });
                 return bid;
             });
         }

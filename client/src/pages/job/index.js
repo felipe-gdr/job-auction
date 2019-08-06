@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 
-import {  JobContext } from '../../contexts/job-context';
+import { JobContext } from '../../contexts/job-context';
 import View from './view';
 
 const JOB_QUERY = gql`
@@ -17,30 +18,36 @@ const JOB_QUERY = gql`
       finished
       winningBid
       user {
-          username
+          id
           displayName
+          avatar
       }
     }
   }
 `;
 
-export default ({ match: { params: { id } } }) => {
+const Job = ({ match: { params: { id } }, history }) => {
   const { job, setJob } = useContext(JobContext);
+
+  const handleBack = () => history.push('/');
 
   return (
     <Query
       query={JOB_QUERY}
       variables={{ id }}>
-      {({ data, loading, error }) => {
-        if (loading) return "loading";
+      {result => {
+        const { data, loading, error } = result;
 
-        setJob(data.job);
-
+        if (data.job) {
+          setJob(data.job);
+        }
 
         return job ? (
-          <View job={job} />
+          <View job={job} onBack={handleBack} loading={loading} error={error} />
         ) : null
       }}
     </Query>
   );
 }
+
+export default withRouter(Job);

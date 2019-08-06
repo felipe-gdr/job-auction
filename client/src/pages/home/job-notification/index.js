@@ -13,7 +13,9 @@ export const JOBS_SUBSCRIPTION = gql`
       createdDate
       description
       user {
+        id
         avatar
+        displayName
       }
     }
   }

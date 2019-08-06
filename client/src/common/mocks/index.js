@@ -50,3 +50,5 @@ export const getTags = () => tags.map((tag, idx) => ({
 }));
 
 export const getBids = () => bids.map(bid => ({ ...bid, createdDate: transformDate(bid.createdDate) }));
+
+export const getBid = () => getRandomItem(getBids());

@@ -3,7 +3,14 @@ import { green, blue } from '@material-ui/core/colors';
 
 export default makeStyles(theme => ({
     title: {
-        padding: theme.spacing(2),
+        display: 'flex',
+        alignItems: 'center',
+    },
+    backIcon: {
+        marginRight: theme.spacing(2),
+    },
+    tag: {
+        marginRight: theme.spacing(1),
     },
     actions: {
         display: 'flex',
@@ -32,4 +39,7 @@ export default makeStyles(theme => ({
         maxHeight: 500,
         overflow: 'auto',
     },
+    loadingText: {
+        marginBottom: theme.spacing(2)
+    }
 }));

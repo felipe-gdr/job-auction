@@ -14,7 +14,7 @@ const JOBS_FRAGMENT = `
   image
   bidCount
   user {
-    username
+    id
     displayName
     avatar
   }
@@ -44,6 +44,7 @@ export default ({ tag }) => (
   <Query
     query={getQuery(tag)}
     variables={getVariables(tag)}
+    fetchPolicy="cache-and-network"
   >
     {({ fetchMore, subscribeToMore, ...result }) => (
       <View
