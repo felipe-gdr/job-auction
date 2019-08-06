@@ -2,8 +2,6 @@ import React from 'react';
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 
-import { JOBS_SUBSCRIPTION } from '../job-notification';
-
 import View from './view';
 
 const JOBS_FRAGMENT = `
@@ -61,19 +59,6 @@ export default ({ tag }) => (
             }
           })
         }}
-        subscribeToNewJobs={() =>
-          subscribeToMore({
-            document: JOBS_SUBSCRIPTION,
-            updateQuery: (prev, { subscriptionData }) => {
-              if (!subscriptionData.data || !subscriptionData.data.jobAdded) return prev;
-              if (tag && !subscriptionData.data.jobAdded.tags.find(t => tag.title === t)) return prev;
-
-              const newFeedItem = subscriptionData.data.jobAdded;
-
-              return { ...prev, jobs: [newFeedItem, ...prev.jobs] };
-            }
-          })
-        }
       />
     )}
   </Query>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import useStyles from './styles';
 import useStylesCommon from '../../common/styles';
@@ -10,7 +11,7 @@ import useStylesCommon from '../../common/styles';
 import AddImages from './add-images';
 import AddTags from './add-tags';
 
-export default ({ onSubmit, onClose }) => {
+export default ({ onSubmit, onClose, loading, error }) => {
     const classes = useStyles();
     const classesCommon = useStylesCommon();
 
@@ -35,6 +36,18 @@ export default ({ onSubmit, onClose }) => {
         <div className={classesCommon.pageRoot}>
             <Paper className={classes.root}>
                 <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                    <TextField
+                        className={classes.input}
+                        label="Title"
+                        id="title"
+                        value={values.titles}
+                        onChange={handleChange('title')}
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        required
+                    />
                     <TextField
                         className={classes.input}
                         label="Due date"
@@ -67,13 +80,18 @@ export default ({ onSubmit, onClose }) => {
                     <div className={classes.input}>
                         <AddImages onSave={handleChangeImages} />
                     </div>
-                    <Button
-                        className={classes.input}
-                        variant="contained"
-                        color="primary"
-                        type="submit">
-                        Create job!
-            </Button>
+                    {loading
+                        ? <CircularProgress />
+                        : (
+                            <Button
+                                className={classes.input}
+                                variant="contained"
+                                color="primary"
+                                type="submit">
+                                Create job!
+                            </Button>
+                        )
+                    }
                 </form>
             </Paper>
         </div>

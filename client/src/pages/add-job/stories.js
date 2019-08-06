@@ -30,4 +30,5 @@ const mocks = [
 
 storiesOf('Add Job Page|Add job form', module)
   .addDecorator(withApolloProvider(mocks))
-  .add('default state', () => <View {...actions} />);
+  .add('default state', () => <View {...actions} />)
+  .add('loading state', () => <View {...actions} loading />);

@@ -8,6 +8,7 @@ export default makeStyles(theme => ({
     },
     backIcon: {
         marginRight: theme.spacing(2),
+        flexShrink: 0,
     },
     tag: {
         marginRight: theme.spacing(1),

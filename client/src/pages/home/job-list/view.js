@@ -6,10 +6,7 @@ import JobCard from './job-card';
 import Loading from './loading';
 import Error from './error';
 
-export default ({ onLoadMore, subscribeToNewJobs, loading, error, data, tag }) => {
-
-    useEffect(subscribeToNewJobs, [tag, loading])
-
+export default ({ onLoadMore, loading, error, data, tag }) => {
     useEffect(() => {
         const handleScroll = () => {
             if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
