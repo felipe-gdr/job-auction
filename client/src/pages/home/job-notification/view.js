@@ -36,7 +36,11 @@ export default ({ job, onClick }) => {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<span id="message-id" className={classes.message}><Avatar src={user.avatar} />{title}</span>}
+            message={<span id="message-id" className={classes.message}>
+                <Avatar src={user.avatar} />
+                New job created: "<span className={classes.jobTitle}>{title}</span>"
+                </span>
+            }
             action={[
                 <Button key="go" color="secondary" size="small" onClick={handleClick}>
                     GO

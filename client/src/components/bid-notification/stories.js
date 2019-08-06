@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import { getBid } from '../../../common/mocks';
+import { getBid } from '../../common/mocks';
 
 import View from './view';
 
@@ -23,7 +23,7 @@ const Container = ({ children }) => {
     )
 }
 
-storiesOf('Job page|New bid notification', module)
+storiesOf('Components|New bid notification', module)
     .add('default state', () => {
         return <Container>
             {bid =>

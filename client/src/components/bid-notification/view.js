@@ -36,7 +36,9 @@ export default ({ bid }) => {
             }}
             message={
                 <span id="message-id" className={classes.message}>
-                    <Avatar src={user.avatar} />New bid: ${price}
+                    <Avatar src={user.avatar} />
+                        "<span className={classes.jobTitle}>{bid.job.title}</span>" 
+                        received a new bid: ${price}
                 </span>
             }
             action={[

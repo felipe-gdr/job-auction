@@ -12,7 +12,7 @@ import {
 import View from './view';
 import { WATCH_LIST_QUERY } from './follow';
 import { BIDS_QUERY } from './bids';
-import { BIDS_SUBSCRIPTION } from './bid-notification';
+import { BIDS_SUBSCRIPTION } from '../../components/bid-notification';
 
 const job = getJob();
 const bids = getBids();

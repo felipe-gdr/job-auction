@@ -13,7 +13,8 @@ import useStylesCommon from '../../common/styles';
 import JobDetails from './job-details';
 import Bids from './bids';
 import Follow from './follow';
-import BidNotification from './bid-notification';
+// import BidNotification from './bid-notification';
+import BidNotification from '../../components/bid-notification';
 
 import Loading from './loading';
 
@@ -78,7 +79,7 @@ export default ({ job, onBack, loading }) => {
                     </Paper>
                 </Grid>
             </Grid>
-            <BidNotification />
+            <BidNotification filterBid={bid => bid.job.id === job.id} />
         </>
     )
 }

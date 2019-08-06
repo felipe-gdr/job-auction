@@ -6,7 +6,7 @@ import { Query } from 'react-apollo';
 import View from './view';
 import { JobContext } from '../../../contexts/job-context';
 import { UserContext } from '../../../contexts/user-context';
-import { BIDS_SUBSCRIPTION } from '../bid-notification'
+import { BIDS_SUBSCRIPTION } from '../../../components/bid-notification';
 
 export const BID_FRAGMENT = `
     id
