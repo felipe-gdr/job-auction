@@ -22,4 +22,5 @@ storiesOf('Home Page|List of jobs', module)
   .addDecorator(withApolloProvider())
   .add('default state', () => <View {...actions} data={{ jobs }} />)
   .add('loading state', () => <View {...actions} loading />)
+  .add('fetching more state', () => <View {...actions} data={{ jobs }} fetchingMore />)
   .add('error state', () => <View {...actions} error />);

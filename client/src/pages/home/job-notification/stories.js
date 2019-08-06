@@ -5,18 +5,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import StoryRouter from 'storybook-react-router';
 
-import { getJob } from '../../../common/mocks';
+import { getRandomJob } from '../../../common/mocks';
 
 import View from './view';
 
 const actions = {
-  onClick: action('onClick'),
+    onClick: action('onClick'),
 };
 
 const Container = ({ children }) => {
-    const [job, setJob] = useState(getJob());
+    const [job, setJob] = useState(getRandomJob());
 
-    const notifyJob = () => setJob(getJob());
+    const notifyJob = () => setJob(getRandomJob());
 
     return (
         <div>

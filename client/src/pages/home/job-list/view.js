@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import useStyles from './styles';
 
@@ -6,7 +7,7 @@ import JobCard from './job-card';
 import Loading from './loading';
 import Error from './error';
 
-export default ({ onLoadMore, loading, error, data, tag }) => {
+export default ({ onLoadMore, loading, error, data, tag, fetchingMore }) => {
     useEffect(() => {
         const handleScroll = () => {
             if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
@@ -15,7 +16,7 @@ export default ({ onLoadMore, loading, error, data, tag }) => {
         if (loading) return;
 
         window.addEventListener('scroll', handleScroll);
-        
+
         return () => window.removeEventListener('scroll', handleScroll);
 
     }, [loading, onLoadMore, data]);
@@ -32,6 +33,10 @@ export default ({ onLoadMore, loading, error, data, tag }) => {
                     <JobCard job={job} />
                 </div>
             ))
+        }
+        {fetchingMore
+            ? <CircularProgress className={classes.fetchMoreSpinner}/>
+            : null
         }
     </div>
 }

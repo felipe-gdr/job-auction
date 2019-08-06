@@ -10,5 +10,11 @@ export default makeStyles(theme => ({
         color: red[500],
         width: 345,
         textAlign: 'center'
+    },
+    fetchMoreSpinner: {
+        position: 'fixed',
+        right: theme.spacing(4),
+        bottom: theme.spacing(4),
+        display: 'inline',
     }
 }));

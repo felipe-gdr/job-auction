@@ -43,11 +43,13 @@ export default ({ tag }) => (
     query={getQuery(tag)}
     variables={getVariables(tag)}
     fetchPolicy="cache-and-network"
+    notifyOnNetworkStatusChange
   >
-    {({ fetchMore, subscribeToMore, ...result }) => (
+    {({ fetchMore, subscribeToMore, networkStatus, ...result }) => (
       <View
         {...result}
         tag={tag}
+        fetchingMore={networkStatus === 3}
         onLoadMore={data => {
           return fetchMore({
             variables: {

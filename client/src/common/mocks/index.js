@@ -43,6 +43,7 @@ export const getJobs = () => jobs.slice(0, 10).map(job => ({
 }));
 
 export const getJob = () => getJobs()[0];
+export const getRandomJob = () => getRandomItem(getJobs());
 
 export const getTags = () => tags.map((tag, idx) => ({
     id: idx,
