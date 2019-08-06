@@ -42,7 +42,7 @@ export const getJobs = () => jobs.slice(0, 10).map(job => ({
     dueDate: transformDate(job.dueDate),
 }));
 
-export const getJob = () => getRandomItem(getJobs());
+export const getJob = () => getJobs()[0];
 
 export const getTags = () => tags.map((tag, idx) => ({
     id: idx,

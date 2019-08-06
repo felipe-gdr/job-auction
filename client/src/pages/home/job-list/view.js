@@ -23,7 +23,7 @@ export default ({ onLoadMore, loading, error, data, tag }) => {
 
     const classes = useStyles();
 
-    if (loading && !data.jobs) return <Loading />;
+    if (loading && (!data || !data.jobs)) return <Loading />;
     if (error) return <Error />;
 
     return <div>
