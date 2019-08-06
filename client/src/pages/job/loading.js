@@ -6,12 +6,14 @@ import Skeleton from 'react-loading-skeleton';
 import Grid from '@material-ui/core/Grid';
 
 import useStyles from './styles';
+import useStylesCommon from '../../common/styles';
 
 export default ({ job }) => {
     const classes = useStyles();
+    const classesCommon = useStylesCommon();
 
     return (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className={classesCommon.pageRoot}>
             <Grid item xs={12}>
                 <Skeleton height={40} />
             </Grid>

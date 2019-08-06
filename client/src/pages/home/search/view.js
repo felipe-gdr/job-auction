@@ -3,11 +3,14 @@ import React from 'react';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
 import useStyles from './styles';
+import Loading from './loading';
 
 const noop = () => { };
 
-export default ({ items, onSelect, selected }) => {
+export default ({ items, onSelect, selected, loading }) => {
     const classes = useStyles();
+
+    if (loading) return <Loading />;
 
     return (
         <div className={classes.root}>

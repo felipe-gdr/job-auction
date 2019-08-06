@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import Avatar from '@material-ui/core/Avatar';
 
 import useStyles from './styles';
 
-export default ({ bid }) => {
+export default ({ bid, onClick }) => {
     const { id, price, user } = bid;
     const [open, setOpen] = useState(true);
     const classes = useStyles();
@@ -37,11 +38,14 @@ export default ({ bid }) => {
             message={
                 <span id="message-id" className={classes.message}>
                     <Avatar src={user.avatar} />
-                        "<span className={classes.jobTitle}>{bid.job.title}</span>" 
+                    "<span className={classes.jobTitle}>{bid.job.title}</span>"
                         received a new bid: ${price}
                 </span>
             }
             action={[
+                <Button key="go" color="secondary" size="small" onClick={onClick}>
+                    GO
+                </Button>,
                 <IconButton
                     key="close"
                     aria-label="close"

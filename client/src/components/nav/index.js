@@ -24,11 +24,10 @@ export default props => {
             query={USERS_QUERY}
         >
             {({ loading, data }) => {
-                if (loading) return null;
-
+                const users = !loading && data ? data.users : [];
                 return (
                     <View
-                        users={data.users}
+                        users={users}
                         onChangeLoggedInUser={setUser}
                         loggedInUser={user}
                     />

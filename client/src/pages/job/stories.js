@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import StoryRouter from 'storybook-react-router';
 
 import { getJob, getBids } from '../../common/mocks';
 import {
@@ -23,6 +24,7 @@ const bids = getBids();
 const emptyBidsMock = createMock('BIDS_QUERY', { query: BIDS_QUERY, variables: { jobId: job.id }, data: { job: { id: job.id, bids: [] } } });
 
 storiesOf('Job Page|Job details page', module)
+    .addDecorator(StoryRouter())
     .addDecorator(withJobProvider(job))
     .addDecorator(withUserProvider())
     .addDecorator(withApolloProvider())
@@ -33,6 +35,7 @@ storiesOf('Job Page|Job details page', module)
     .add('loading state', () => <View job={job} loading />);
 
 storiesOf('Job Page|Job details page', module)
+    .addDecorator(StoryRouter())
     .addDecorator(withJobProvider(job))
     .addDecorator(withUserProvider())
     .addDecorator(withApolloProvider(emptyBidsMock))

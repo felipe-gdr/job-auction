@@ -40,11 +40,10 @@ export default props => {
             variables={{ jobId: job.id }}
         >
             {({ loading, data, subscribeToMore }) => {
-                if (loading) return null;
-
                 return (
                     <View
                         {...props}
+                        loading={loading}
                         bids={data && data.job ? data.job.bids : []}
                         subscribeToNewBids={() =>
                             subscribeToMore({

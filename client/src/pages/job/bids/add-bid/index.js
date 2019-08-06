@@ -8,7 +8,6 @@ import { UserContext } from '../../../../contexts/user-context';
 import View from './view';
 
 import { BIDS_QUERY } from '../index';
-import { JOBS_RECENT_QUERY } from '../../../home/job-list'
 
 export const ADD_BID_MUTATION = gql`
   mutation AddBid(

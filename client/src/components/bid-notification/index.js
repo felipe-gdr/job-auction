@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 
 import View from './view';
 import { UserContext } from '../../contexts/user-context';
+import { withRouter } from 'react-router';
 
 export const BIDS_SUBSCRIPTION = gql`
   subscription onBidAdded {
@@ -27,8 +28,9 @@ export const BIDS_SUBSCRIPTION = gql`
 
 const noop = () => { };
 
-export default ({ filterBid, onReceiveBid = noop }) => {
+const BidNotification = ({ filterBid, onReceiveBid = noop, history }) => {
   const { user } = useContext(UserContext);
+
 
   return (
     <Subscription
@@ -45,8 +47,12 @@ export default ({ filterBid, onReceiveBid = noop }) => {
 
         if (filterBid && !filterBid(data.bidAdded)) return null;
 
-        return <View bid={data.bidAdded} />;
+        const handleClick = () => history.push(`/job/${data.bidAdded.job.id}`)
+
+        return <View bid={data.bidAdded} onClick={handleClick} />;
       }}
     </Subscription>
   );
 }
+
+export default withRouter(BidNotification);

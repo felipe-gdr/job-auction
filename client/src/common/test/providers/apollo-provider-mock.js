@@ -38,6 +38,7 @@ const defaultMocks = {
 
 const getDuplicatedSubscriptions = () => [
   createMock('BIDS_SUBSCRIPTION', { query: BIDS_SUBSCRIPTION }).BIDS_SUBSCRIPTION,
+  createMock('BIDS_SUBSCRIPTION', { query: BIDS_SUBSCRIPTION }).BIDS_SUBSCRIPTION,
 ];
 
 const getMockValues = mockMap => {

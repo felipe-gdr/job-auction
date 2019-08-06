@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import StoryRouter from 'storybook-react-router';
 
 import { getJob } from '../../../common/mocks';
 
@@ -29,6 +30,7 @@ const Container = ({ children }) => {
 }
 
 storiesOf('Home Page|New job notification', module)
+    .addDecorator(StoryRouter())
     .add('default state', () => {
         return <Container>
             {job =>

@@ -14,4 +14,5 @@ const tags = getTags();
 
 storiesOf('Home Page|Search bar used to filter jobs', module)
     .add('default state', () => <View  {...actions} items={tags} />)
-    .add('selected state', () => <View  {...actions} items={tags} selected={tags[0]} />); 
+    .add('selected state', () => <View  {...actions} items={tags} selected={tags[0]} />)
+    .add('loading state', () => <View loading />); 

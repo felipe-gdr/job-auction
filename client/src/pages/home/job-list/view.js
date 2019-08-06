@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import BidNotification from '../../../components/bid-notification';
 
 import useStyles from './styles';
 
@@ -34,6 +33,5 @@ export default ({ onLoadMore, loading, error, data, tag }) => {
                 </div>
             ))
         }
-        <BidNotification />
     </div>
 }

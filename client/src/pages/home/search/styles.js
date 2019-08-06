@@ -8,4 +8,7 @@ export default makeStyles(theme => ({
     chip: {
         margin: theme.spacing(0.5),
     },
+    loading: {
+        width: '100%',
+    }
 }));

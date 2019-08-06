@@ -19,5 +19,8 @@ export default makeStyles(theme => ({
     },
     addBidContainer: {
         marginBottom: theme.spacing(2)
+    },
+    loading: {
+        padding: theme.spacing(4)
     }
 }));

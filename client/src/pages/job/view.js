@@ -30,7 +30,7 @@ export default ({ job, onBack, loading }) => {
 
     return (
         <>
-            <Grid container spacing={3} className={`${classes.root} ${classesCommon.pageRoot}`}>
+            <Grid container spacing={3} className={classesCommon.pageRoot}>
                 <Grid item xs={9} className={classes.title}>
                     <Fab
                         size="small"
