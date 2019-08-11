@@ -12,12 +12,22 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-boost';
 
+const baseUrlHttp =
+  process.env.NODE_ENV === 'production'
+    ? 'https://server-mt5sqryi4a-an.a.run.app'
+    : 'http://localhost:4000';
+
+const baseUrlWs =
+  process.env.NODE_ENV === 'production'
+    ? 'wss://server-mt5sqryi4a-an.a.run.app'
+    : 'ws://localhost:4000';
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: `${baseUrlHttp}/graphql`
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: `${baseUrlWs}/graphql`,
   options: {
     reconnect: true
   }
