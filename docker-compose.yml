@@ -1,0 +1,12 @@
+version: '3'
+services:
+  job-auction-client:
+    build: ./client
+    links:
+      - job-auction-server
+    ports:
+      - "8080:80"
+  job-auction-server:
+    build: ./server
+    ports:
+      - "4000:4000"
