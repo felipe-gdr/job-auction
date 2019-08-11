@@ -7,34 +7,30 @@ import { UserContext } from '../../contexts/user-context';
 
 // TODO filter watch list by job id
 export const USERS_QUERY = gql`
-    query {
-        users {
-            id
-            displayName
-            avatar
-        }
+  query {
+    users {
+      id
+      displayName
+      avatar
     }
+  }
 `;
 
 export default props => {
-    const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-    return (
-        <Query
-            query={USERS_QUERY}
-        >
-            {({ loading, data }) => {
-                const users = !loading && data ? data.users : [];
-                return (
-                    <View
-                        users={users}
-                        onChangeLoggedInUser={setUser}
-                        loggedInUser={user}
-                    />
-                )
-            }}
-        </Query>
-
-    );
-}
-
+  return (
+    <Query query={USERS_QUERY}>
+      {({ loading, data }) => {
+        const users = !loading && data ? data.users : [];
+        return (
+          <View
+            users={users}
+            onChangeLoggedInUser={setUser}
+            loggedInUser={user}
+          />
+        );
+      }}
+    </Query>
+  );
+};

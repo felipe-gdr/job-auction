@@ -7,16 +7,16 @@ import useStyles from './styles';
 import AddBid from './add-bid';
 
 export default () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <div className={classes.noBidContainer}>
-            <div className={classes.noBidAdd}>
-                <AddBid />
-            </div>
-            <Typography variant="h6">
-                There are no bids yet. Be the first to make one!
-            </Typography>
-        </div>
-    );
-}
+  return (
+    <div className={classes.noBidContainer}>
+      <div className={classes.noBidAdd}>
+        <AddBid />
+      </div>
+      <Typography variant="h6">
+        There are no bids yet. Be the first to make one!
+      </Typography>
+    </div>
+  );
+};

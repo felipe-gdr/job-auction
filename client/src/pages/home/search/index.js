@@ -1,6 +1,6 @@
 import React from 'react';
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 import View from './view';
 
@@ -16,7 +16,12 @@ export const TAGS_QUERY = gql`
 export default ({ onSelect, selected }) => (
   <Query query={TAGS_QUERY}>
     {({ data, loading, error }) => (
-      <View onSelect={onSelect} items={data.tags} selected={selected} loading={loading} />
+      <View
+        onSelect={onSelect}
+        items={data.tags}
+        selected={selected}
+        loading={loading}
+      />
     )}
   </Query>
-)
+);

@@ -11,11 +11,16 @@ export default ({ onOpen }) => {
 
   return (
     <div className={classes.addBid}>
-      <Tooltip title="Bid!" >
-        <Fab color="primary" aria-label="add" className={classes.noBidButton} onClick={onOpen}>
+      <Tooltip title="Bid!">
+        <Fab
+          color="primary"
+          aria-label="add"
+          className={classes.noBidButton}
+          onClick={onOpen}
+        >
           <MoneyIcon />
         </Fab>
       </Tooltip>
     </div>
-  )
-}
+  );
+};

@@ -11,40 +11,43 @@ import CheckIcon from '@material-ui/icons/Check';
 
 import useStyles from './styles';
 
- export default ({ job }) => {
-    const { dueDate, finished, winingBid } = job;
-    const now = new Date();
+export default ({ job }) => {
+  const { dueDate, finished, winingBid } = job;
+  const now = new Date();
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    if (finished) {
-        const { price } = winingBid;
-
-        return (
-            <>
-                <ListItemAvatar>
-                    <Avatar className={classes.jobDoneIcon}>
-                        <CheckIcon />
-                    </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Finished" secondary={`$${price} paid`} />
-                <ListItemSecondaryAction>
-                    <Typography variant="subtitle2" className={classes.subtle}>
-                        {formatDistance(dueDate, now)} ago
-                    </Typography>
-                </ListItemSecondaryAction>
-            </>
-        )
-    }
+  if (finished) {
+    const { price } = winingBid;
 
     return (
-        <>
-            <ListItemAvatar>
-                <Avatar className={classes.jobOngoingIcon}>
-                    <CalendarIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Receiving bids" secondary={`due in ${formatDistance(dueDate, now)}`} />
-        </>
-    )
-}
+      <>
+        <ListItemAvatar>
+          <Avatar className={classes.jobDoneIcon}>
+            <CheckIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Finished" secondary={`$${price} paid`} />
+        <ListItemSecondaryAction>
+          <Typography variant="subtitle2" className={classes.subtle}>
+            {formatDistance(dueDate, now)} ago
+          </Typography>
+        </ListItemSecondaryAction>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <ListItemAvatar>
+        <Avatar className={classes.jobOngoingIcon}>
+          <CalendarIcon />
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText
+        primary="Receiving bids"
+        secondary={`due in ${formatDistance(dueDate, now)}`}
+      />
+    </>
+  );
+};

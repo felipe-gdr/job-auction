@@ -18,20 +18,22 @@ export default ({ bids, finished }) => {
 
   return (
     <>
-      {finished
-        ? null
-        : (
-          <>
-            <div className={classes.addBidContainer}>
-              <AddBid />
-            </div>
-            <Divider variant="fullWidth" component="div" />
-          </>
-        )
-      }
+      {finished ? null : (
+        <>
+          <div className={classes.addBidContainer}>
+            <AddBid />
+          </div>
+          <Divider variant="fullWidth" component="div" />
+        </>
+      )}
       <List className={classes.root}>
         {bids.map(bid => {
-          const { user: { displayName, avatar }, price, createdDate, comment } = bid;
+          const {
+            user: { displayName, avatar },
+            price,
+            createdDate,
+            comment
+          } = bid;
           return (
             <div key={bid.id}>
               <ListItem alignItems="flex-start">
@@ -41,12 +43,10 @@ export default ({ bids, finished }) => {
                 <ListItemText
                   primary={
                     <div className={classes.bidHeader}>
-                      <Typography variant="h6">
-                        ${price}
-                      </Typography>
+                      <Typography variant="h6">${price}</Typography>
                       <Typography component="div" color="textSecondary">
                         {formatDistance(createdDate, now)} ago
-                    </Typography>
+                      </Typography>
                     </div>
                   }
                   secondary={
@@ -62,9 +62,9 @@ export default ({ bids, finished }) => {
               </ListItem>
               <Divider variant="inset" component="li" />
             </div>
-          )
+          );
         })}
       </List>
     </>
   );
-}
+};

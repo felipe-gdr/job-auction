@@ -4,12 +4,19 @@
         "plugin:react/recommended",
         "plugin:prettier/recommended"
     ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
     "plugins": [
         "react",
         "prettier"
     ],
     "env": {
-        "browser": true,
+        "browser": true
     },
     "rules": {
         "prettier/prettier": [

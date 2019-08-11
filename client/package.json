@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "lint:fix": "eslint './src/**/*.js'"
+    "lint": "eslint './src/**/*.js'",
+    "lint:fix": "eslint './src/**/*.js' --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

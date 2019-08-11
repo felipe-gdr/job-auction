@@ -8,9 +8,9 @@ import View from './view';
 import Loading from './loading';
 
 const actions = {
-    onClick: action('onClick'),
+  onClick: action('onClick')
 };
 
 storiesOf('Home Page|Job item to be displayed on the list', module)
-    .add('default state', () => <View job={getJob()} {...actions} />)
-    .add('loading state', () => <Loading />);
+  .add('default state', () => <View job={getJob()} {...actions} />)
+  .add('loading state', () => <Loading />);
