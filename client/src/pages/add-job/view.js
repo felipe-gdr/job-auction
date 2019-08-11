@@ -11,7 +11,7 @@ import useStylesCommon from '../../common/styles';
 import AddImages from './add-images';
 import AddTags from './add-tags';
 
-export default ({ onSubmit, onClose, loading, error }) => {
+export default ({ onSubmit, loading }) => {
   const classes = useStyles();
   const classesCommon = useStylesCommon();
 

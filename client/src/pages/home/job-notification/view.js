@@ -39,7 +39,8 @@ export default ({ job, onClick }) => {
       message={
         <span id="message-id" className={classes.message}>
           <Avatar src={user.avatar} />
-          New job created: "<span className={classes.jobTitle}>{title}</span>"
+          New job created: &quot;
+          <span className={classes.jobTitle}>{title}</span>&quot;
         </span>
       }
       action={[

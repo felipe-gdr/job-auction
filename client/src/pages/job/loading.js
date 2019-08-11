@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './styles';
 import useStylesCommon from '../../common/styles';
 
-export default ({ job }) => {
+const Loading = () => {
   const classes = useStyles();
   const classesCommon = useStylesCommon();
 
@@ -36,3 +36,5 @@ export default ({ job }) => {
     </Grid>
   );
 };
+
+export default Loading;

@@ -25,7 +25,7 @@ export const ADD_BID_MUTATION = gql`
   }
 `;
 
-export default props => {
+export default () => {
   const { user } = useContext(UserContext);
   const { job } = useContext(JobContext);
 
@@ -50,7 +50,7 @@ export default props => {
         });
       }}
     >
-      {(addBid, { data }) => {
+      {addBid => {
         const handleAddBid = data => {
           addBid({ variables: { ...data, jobId: job.id, userId: user.id } });
         };

@@ -15,7 +15,7 @@ export const TAGS_QUERY = gql`
 
 export default ({ onSelect, selected }) => (
   <Query query={TAGS_QUERY}>
-    {({ data, loading, error }) => (
+    {({ data, loading }) => (
       <View
         onSelect={onSelect}
         items={data.tags}

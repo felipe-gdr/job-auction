@@ -7,7 +7,7 @@ import JobCard from './job-card';
 import Loading from './loading';
 import Error from './error';
 
-export default ({ onLoadMore, loading, error, data, tag, fetchingMore }) => {
+export default ({ onLoadMore, loading, error, data, fetchingMore }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (

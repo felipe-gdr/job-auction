@@ -16,7 +16,7 @@ export const USERS_QUERY = gql`
   }
 `;
 
-export default props => {
+const Nav = () => {
   const { user, setUser } = useContext(UserContext);
 
   return (
@@ -34,3 +34,5 @@ export default props => {
     </Query>
   );
 };
+
+export default Nav;

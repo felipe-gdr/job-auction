@@ -46,7 +46,7 @@ export default ({ tag }) => (
     fetchPolicy="cache-and-network"
     notifyOnNetworkStatusChange
   >
-    {({ fetchMore, subscribeToMore, networkStatus, ...result }) => (
+    {({ fetchMore, networkStatus, ...result }) => (
       <View
         {...result}
         tag={tag}
