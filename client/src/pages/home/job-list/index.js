@@ -1,6 +1,6 @@
 import React from 'react';
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 import View from './view';
 
@@ -16,7 +16,7 @@ const JOBS_FRAGMENT = `
     displayName
     avatar
   }
-`
+`;
 
 export const JOBS_RECENT_QUERY = gql`
   query ($lastId: ID) {
@@ -34,9 +34,10 @@ export const JOBS_BY_TAG_QUERY = gql`
   }
 `;
 
-const getQuery = tag => tag ? JOBS_BY_TAG_QUERY : JOBS_RECENT_QUERY;
+const getQuery = tag => (tag ? JOBS_BY_TAG_QUERY : JOBS_RECENT_QUERY);
 
-const getVariables = tag => tag ? { lastId: null, tag: tag.title } : { lastId: null };
+const getVariables = tag =>
+  tag ? { lastId: null, tag: tag.title } : { lastId: null };
 
 export default ({ tag }) => (
   <Query
@@ -53,13 +54,16 @@ export default ({ tag }) => (
         onLoadMore={data => {
           return fetchMore({
             variables: {
-              lastId: data.jobs && data.jobs.length > 0 ? data.jobs[data.jobs.length - 1].id : null
+              lastId:
+                data.jobs && data.jobs.length > 0
+                  ? data.jobs[data.jobs.length - 1].id
+                  : null
             },
             updateQuery: (prev, { fetchMoreResult }) => {
               if (!fetchMoreResult) return prev;
               return { ...prev, jobs: [...prev.jobs, ...fetchMoreResult.jobs] };
             }
-          })
+          });
         }}
       />
     )}

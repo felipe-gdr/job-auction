@@ -5,7 +5,7 @@
         "plugin:prettier/recommended"
     ],
     "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 2018,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
@@ -16,9 +16,11 @@
         "prettier"
     ],
     "env": {
-        "browser": true
+        "browser": true,
+        "node": true 
     },
     "rules": {
+        "react/prop-types": "off",
         "prettier/prettier": [
             "error",
             {
