@@ -7,21 +7,18 @@ import Skeleton from 'react-loading-skeleton';
 
 import useStyles from './styles';
 
-export default ({ job }) => {
-    const classes = useStyles();
+export default () => {
+  const classes = useStyles();
 
-    return (
-        <Card className={classes.card}>
-            <CardHeader
-                title={<Skeleton />}
-                subheader={<Skeleton />}
-            />
-            <CardContent>
-                <Skeleton count={7} />
-            </CardContent>
-            <CardActions disableSpacing>
-                <Skeleton />
-            </CardActions>
-        </Card>
-    );
-}
+  return (
+    <Card className={classes.card}>
+      <CardHeader title={<Skeleton />} subheader={<Skeleton />} />
+      <CardContent>
+        <Skeleton count={7} />
+      </CardContent>
+      <CardActions disableSpacing>
+        <Skeleton />
+      </CardActions>
+    </Card>
+  );
+};

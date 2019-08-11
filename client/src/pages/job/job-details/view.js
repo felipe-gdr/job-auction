@@ -15,28 +15,32 @@ import useStyles from './styles';
 import JobStatus from './job-status';
 
 export default ({ job }) => {
-    const { user, createdDate } = job;
-    const classes = useStyles();
+  const { user, createdDate } = job;
+  const classes = useStyles();
 
-    const now = new Date();
+  const now = new Date();
 
-    return (
-        <List>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar src={user.avatar} color="green" className={classes.userAvatar} />
-                </ListItemAvatar>
-                <ListItemText primary="Posted by" secondary={user.displayName} />
-                <ListItemSecondaryAction>
-                    <Typography variant="subtitle2" className={classes.subtle}>
-                        {formatDistance(createdDate, now)} ago
-                    </Typography>
-                </ListItemSecondaryAction>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-                <JobStatus job={job} />
-            </ListItem>
-        </List>
-    )
-}
+  return (
+    <List>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar
+            src={user.avatar}
+            color="green"
+            className={classes.userAvatar}
+          />
+        </ListItemAvatar>
+        <ListItemText primary="Posted by" secondary={user.displayName} />
+        <ListItemSecondaryAction>
+          <Typography variant="subtitle2" className={classes.subtle}>
+            {formatDistance(createdDate, now)} ago
+          </Typography>
+        </ListItemSecondaryAction>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem>
+        <JobStatus job={job} />
+      </ListItem>
+    </List>
+  );
+};

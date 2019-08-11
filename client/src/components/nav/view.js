@@ -23,24 +23,27 @@ export default ({ users, onChangeLoggedInUser, loggedInUser }) => {
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
-  }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
-  }
+  };
 
   const handleChangeLoggedInUser = user => {
     onChangeLoggedInUser(user);
     handleClose();
-  }
+  };
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Link to="/" className={classes.link}>
-            <Typography variant="h6" >
-              Job Auction <span role="img" aria-label="hammer">🔨</span>
+            <Typography variant="h6">
+              Job Auction{' '}
+              <span role="img" aria-label="hammer">
+                🔨
+              </span>
             </Typography>
           </Link>
           <Link to="/add-job" className={classes.link}>
@@ -67,40 +70,45 @@ export default ({ users, onChangeLoggedInUser, loggedInUser }) => {
               onClick={handleMenu}
               color="inherit"
             >
-              {loggedInUser ?
-                <Avatar src={loggedInUser.avatar}>US</Avatar> :
+              {loggedInUser ? (
+                <Avatar src={loggedInUser.avatar}>US</Avatar>
+              ) : (
                 <AccountCircle />
-              }
+              )}
             </IconButton>
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'right'
               }}
               open={open}
               onClose={handleClose}
             >
-
               {users.map(user => (
-                <MenuItem key={user.id} onClick={() => handleChangeLoggedInUser(user)}>
+                <MenuItem
+                  key={user.id}
+                  onClick={() => handleChangeLoggedInUser(user)}
+                >
                   <Avatar src={user.avatar} />
                   {user.displayName}
                 </MenuItem>
               ))}
-              {loggedInUser &&
-                <MenuItem onClick={() => handleChangeLoggedInUser(null)}>Log out</MenuItem>
-              }
+              {loggedInUser && (
+                <MenuItem onClick={() => handleChangeLoggedInUser(null)}>
+                  Log out
+                </MenuItem>
+              )}
             </Menu>
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};

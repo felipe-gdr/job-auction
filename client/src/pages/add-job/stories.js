@@ -4,10 +4,10 @@ import { action } from '@storybook/addon-actions';
 
 import View from './view';
 
-import { withApolloProvider } from '../../common/test/providers'
+import { withApolloProvider } from '../../common/test/providers';
 
 const actions = {
-  onSubmit: action('onSubmit'),
+  onSubmit: action('onSubmit')
 };
 
 storiesOf('Add Job Page|Add job form', module)

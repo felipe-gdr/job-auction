@@ -9,30 +9,30 @@ import { getBid } from '../../common/mocks';
 import View from './view';
 
 const actions = {
-    onClick: action('onClick'),
+  onClick: action('onClick')
 };
 
 const Container = ({ children }) => {
-    const [bid, setBid] = useState(getBid());
+  const [bid, setBid] = useState(getBid());
 
-    const notifyBid = () => setBid(getBid());
+  const notifyBid = () => setBid(getBid());
 
-    return (
-        <div>
-            <Typography variant="h6">
-                Notification to user when a new bid is created
-            </Typography>
-            {children(bid)}
-            <Button variant="contained" onClick={notifyBid}>Simulate a new incoming bid</Button>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Typography variant="h6">
+        Notification to user when a new bid is created
+      </Typography>
+      {children(bid)}
+      <Button variant="contained" onClick={notifyBid}>
+        Simulate a new incoming bid
+      </Button>
+    </div>
+  );
+};
 
-storiesOf('Components|New bid notification', module)
-    .add('default state', () => {
-        return <Container>
-            {bid =>
-                <View bid={bid} {...actions} />
-            }
-        </Container>
-    }); 
+storiesOf('Components|New bid notification', module).add(
+  'default state',
+  () => {
+    return <Container>{bid => <View bid={bid} {...actions} />}</Container>;
+  }
+);

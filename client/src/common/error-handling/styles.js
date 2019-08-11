@@ -1,6 +1,6 @@
 export default {
-    root: {
-        display: 'flex',
-        alignContent: 'center',
-    }
+  root: {
+    display: 'flex',
+    alignContent: 'center'
+  }
 };

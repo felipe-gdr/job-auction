@@ -4,7 +4,11 @@ import StoryRouter from 'storybook-react-router';
 
 import Home from './view';
 
-import { withJobProvider, withApolloProvider, withUserProvider } from '../../common/test/providers';
+import {
+  withJobProvider,
+  withApolloProvider,
+  withUserProvider
+} from '../../common/test/providers';
 
 storiesOf('Home Page|Main', module)
   .addDecorator(StoryRouter())

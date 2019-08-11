@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   postButton: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(2)
   },
   actions: {
     flexGrow: 1,
@@ -13,7 +13,7 @@ export default makeStyles(theme => ({
     justifyContent: 'flex-end'
   },
   link: {
-      textDecoration: 'none',
-      color: 'inherit',
+    textDecoration: 'none',
+    color: 'inherit'
   }
 }));

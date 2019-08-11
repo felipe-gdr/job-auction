@@ -17,11 +17,11 @@ export default () => {
   return (
     <div className={`${classesCommon.pageRoot} ${classes.root}`}>
       <Search onSelect={setTag} selected={tag} />
-      <div className={classes.list} >
+      <div className={classes.list}>
         <JobList tag={tag} />
       </div>
       <JobNotification />
       <BidNotification />
     </div>
   );
-}
+};

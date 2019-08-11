@@ -10,50 +10,52 @@ import Avatar from '@material-ui/core/Avatar';
 import useStyles from './styles';
 
 export default ({ job, onClick }) => {
-    const { id, title, user } = job;
-    const [open, setOpen] = useState(true);
-    const classes = useStyles();
+  const { id, title, user } = job;
+  const [open, setOpen] = useState(true);
+  const classes = useStyles();
 
-    useEffect(() => {
-        if (job) {
-            setOpen(true);
-        }
-    }, [job])
+  useEffect(() => {
+    if (job) {
+      setOpen(true);
+    }
+  }, [job]);
 
-    const handleClose = () => setOpen(false);
-    const handleClick = () => onClick(job);
+  const handleClose = () => setOpen(false);
+  const handleClick = () => onClick(job);
 
-    return (
-        <Snackbar
-            key={id}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            ContentProps={{
-                'aria-describedby': 'message-id',
-            }}
-            message={<span id="message-id" className={classes.message}>
-                <Avatar src={user.avatar} />
-                New job created: "<span className={classes.jobTitle}>{title}</span>"
-                </span>
-            }
-            action={[
-                <Button key="go" color="secondary" size="small" onClick={handleClick}>
-                    GO
-                </Button>,
-                <IconButton
-                    key="close"
-                    aria-label="close"
-                    color="inherit"
-                    onClick={handleClose}
-                >
-                    <CloseIcon />
-                </IconButton>,
-            ]}
-        />
-    );
-}
+  return (
+    <Snackbar
+      key={id}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left'
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      ContentProps={{
+        'aria-describedby': 'message-id'
+      }}
+      message={
+        <span id="message-id" className={classes.message}>
+          <Avatar src={user.avatar} />
+          New job created: &quot;
+          <span className={classes.jobTitle}>{title}</span>&quot;
+        </span>
+      }
+      action={[
+        <Button key="go" color="secondary" size="small" onClick={handleClick}>
+          GO
+        </Button>,
+        <IconButton
+          key="close"
+          aria-label="close"
+          color="inherit"
+          onClick={handleClose}
+        >
+          <CloseIcon />
+        </IconButton>
+      ]}
+    />
+  );
+};

@@ -6,10 +6,16 @@ import { Loading as LoadingCard } from './job-card';
 const COUNT = 5;
 
 export default () => {
-    const classes = useStyles();
-    return (
-        <div>
-            {Array(COUNT).fill().map((_, i) => <div key={i} className={classes.listItem}><LoadingCard /></div>)}
-        </div>
-    );
-} 
+  const classes = useStyles();
+  return (
+    <div>
+      {Array(COUNT)
+        .fill()
+        .map((_, i) => (
+          <div key={i} className={classes.listItem}>
+            <LoadingCard />
+          </div>
+        ))}
+    </div>
+  );
+};

@@ -10,31 +10,29 @@ import { getRandomJob } from '../../../common/mocks';
 import View from './view';
 
 const actions = {
-    onClick: action('onClick'),
+  onClick: action('onClick')
 };
 
 const Container = ({ children }) => {
-    const [job, setJob] = useState(getRandomJob());
+  const [job, setJob] = useState(getRandomJob());
 
-    const notifyJob = () => setJob(getRandomJob());
+  const notifyJob = () => setJob(getRandomJob());
 
-    return (
-        <div>
-            <Typography variant="h6">
-                Notification to user when a new job is created
-            </Typography>
-            {children(job)}
-            <Button variant="contained" onClick={notifyJob} >Simulate a new incoming job</Button>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Typography variant="h6">
+        Notification to user when a new job is created
+      </Typography>
+      {children(job)}
+      <Button variant="contained" onClick={notifyJob}>
+        Simulate a new incoming job
+      </Button>
+    </div>
+  );
+};
 
 storiesOf('Home Page|New job notification', module)
-    .addDecorator(StoryRouter())
-    .add('default state', () => {
-        return <Container>
-            {job =>
-                <View job={job} {...actions} />
-            }
-        </Container>
-    }); 
+  .addDecorator(StoryRouter())
+  .add('default state', () => {
+    return <Container>{job => <View job={job} {...actions} />}</Container>;
+  });

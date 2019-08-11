@@ -13,42 +13,40 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-boost';
 
 const httpLink = new HttpLink({
-    uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:4000/graphql'
 });
 
 const wsLink = new WebSocketLink({
-    uri: `ws://localhost:4000/graphql`,
-    options: {
-        reconnect: true,
-    },
+  uri: `ws://localhost:4000/graphql`,
+  options: {
+    reconnect: true
+  }
 });
 
 const terminatingLink = split(
-    ({ query }) => {
-      const { kind, operation } = getMainDefinition(query);
-      return (
-        kind === 'OperationDefinition' && operation === 'subscription'
-      );
-    },
-    wsLink,
-    httpLink,
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  httpLink
 );
-  
+
 const link = ApolloLink.from([terminatingLink]);
-  
+
 const cache = new InMemoryCache();
-  
+
 const client = new ApolloClient({
-    link,
-    cache,
+  link,
+  cache
 });
 
 function Main() {
-    return (
-        <ApolloProvider client={client}>
-            <Pages />
-        </ApolloProvider>
-    );
+  return (
+    <ApolloProvider client={client}>
+      <Pages />
+    </ApolloProvider>
+  );
 }
 
 ReactDOM.render(<Main />, document.getElementById('root'));

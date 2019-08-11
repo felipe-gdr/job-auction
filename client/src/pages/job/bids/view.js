@@ -5,11 +5,13 @@ import Empty from './empty';
 import Loading from './loading';
 
 export default ({ subscribeToNewBids, bids, loading, ...otherProps }) => {
-    useEffect(() => subscribeToNewBids(), [subscribeToNewBids]);
+  useEffect(() => subscribeToNewBids(), [subscribeToNewBids]);
 
-    if (loading) return <Loading />
+  if (loading) return <Loading />;
 
-    return bids && bids.length > 0
-        ? <NonEmpty bids={bids} {...otherProps} />
-        : <Empty />;
-}
+  return bids && bids.length > 0 ? (
+    <NonEmpty bids={bids} {...otherProps} />
+  ) : (
+    <Empty />
+  );
+};

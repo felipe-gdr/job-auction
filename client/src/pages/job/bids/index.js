@@ -18,7 +18,7 @@ export const BID_FRAGMENT = `
         displayName
         avatar
     }
-`
+`;
 
 export const BIDS_QUERY = gql`
     query($jobId: ID!) {
@@ -32,37 +32,39 @@ export const BIDS_QUERY = gql`
 `;
 
 export default props => {
-    const { job } = useContext(JobContext);
-    const { user } = useContext(UserContext);
-    return (
-        <Query
-            query={BIDS_QUERY}
-            variables={{ jobId: job.id }}
-        >
-            {({ loading, data, subscribeToMore }) => {
-                return (
-                    <View
-                        {...props}
-                        loading={loading}
-                        bids={data && data.job ? data.job.bids : []}
-                        subscribeToNewBids={() =>
-                            subscribeToMore({
-                                document: BIDS_SUBSCRIPTION,
-                                updateQuery: (prev, { subscriptionData }) => {
-                                    if (!subscriptionData.data || !subscriptionData.data.bidAdded) return prev;
-                                    if (subscriptionData.data.bidAdded.user.id === user.id) return prev;
-                                    if (subscriptionData.data.bidAdded.job.id !== job.id) return prev;
+  const { job } = useContext(JobContext);
+  const { user } = useContext(UserContext);
+  return (
+    <Query query={BIDS_QUERY} variables={{ jobId: job.id }}>
+      {({ loading, data, subscribeToMore }) => {
+        return (
+          <View
+            {...props}
+            loading={loading}
+            bids={data && data.job ? data.job.bids : []}
+            subscribeToNewBids={() =>
+              subscribeToMore({
+                document: BIDS_SUBSCRIPTION,
+                updateQuery: (prev, { subscriptionData }) => {
+                  if (!subscriptionData.data || !subscriptionData.data.bidAdded)
+                    return prev;
+                  if (subscriptionData.data.bidAdded.user.id === user.id)
+                    return prev;
+                  if (subscriptionData.data.bidAdded.job.id !== job.id)
+                    return prev;
 
-                                    const updatedJob = { ...prev.job, bids: [subscriptionData.data.bidAdded, ...prev.job.bids, ] }
+                  const updatedJob = {
+                    ...prev.job,
+                    bids: [subscriptionData.data.bidAdded, ...prev.job.bids]
+                  };
 
-                                    return { ...prev, job: updatedJob };
-                                }
-                            })
-                        }
-                    />
-                )
-            }}
-        </Query>
-
-    );
-}
+                  return { ...prev, job: updatedJob };
+                }
+              })
+            }
+          />
+        );
+      }}
+    </Query>
+  );
+};
